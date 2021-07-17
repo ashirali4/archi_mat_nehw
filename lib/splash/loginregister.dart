@@ -29,20 +29,20 @@ class _LoginRegisterState extends State<LoginRegister> {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 40),
-                child: Center(
-                  child: Container(
-                    alignment: Alignment.topCenter,
-                    child: Image(
-                      image: AssetImage('assets/images/archimatlogo.png'),
-                      fit: BoxFit.cover,
-                      // height: 160,
-                      width: 180,
-                    ),
-                  ),
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 40),
+              //   child: Center(
+              //     child: Container(
+              //       alignment: Alignment.topCenter,
+              //       child: Image(
+              //         image: AssetImage('assets/images/archimatlogo.png'),
+              //         fit: BoxFit.cover,
+              //         // height: 160,
+              //         width: 180,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
