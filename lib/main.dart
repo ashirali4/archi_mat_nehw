@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: SplashScreen()
-        //  TabPage(
+        //     TabPage(
         //   index: 0,
         // ),
         );

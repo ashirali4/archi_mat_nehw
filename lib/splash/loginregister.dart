@@ -16,33 +16,40 @@ class _LoginRegisterState extends State<LoginRegister> {
         body: SafeArea(
       child: Stack(
         children: <Widget>[
-          SvgPicture.asset(
-            'assets/images/background.svg',
-            width: MediaQuery.of(context).size.width,
-          ),
-          // Image(
-          //   image: AssetImage('assets/images/splashbg.png'),
-          //   fit: BoxFit.cover,
-          //   width: MediaQuery.of(context).size.width,
-          //   // height: MediaQuery.of(context).size.height * 0.9,
+          // Container(
+          //   height: MediaQuery.of(context).size.height,
+          //   child: Container(
+          //     height: MediaQuery.of(context).size.height * 0.5,
+          //     child: SvgPicture.asset(
+          //       'assets/images/background.svg',
+          //       color: AppTheme().pink,
+          //       width: MediaQuery.of(context).size.width,
+          //     ),
+          //   ),
           // ),
+          Image(
+            image: AssetImage('assets/images/back.png'),
+            fit: BoxFit.cover,
+            width: MediaQuery.of(context).size.width,
+            // height: MediaQuery.of(context).size.height * 0.9,
+          ),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 40),
-              //   child: Center(
-              //     child: Container(
-              //       alignment: Alignment.topCenter,
-              //       child: Image(
-              //         image: AssetImage('assets/images/archimatlogo.png'),
-              //         fit: BoxFit.cover,
-              //         // height: 160,
-              //         width: 180,
-              //       ),
-              //     ),
-              //   ),
-              // ),
+              Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: Center(
+                  child: Container(
+                    alignment: Alignment.topCenter,
+                    // child: Image(
+                    //   image: AssetImage('assets/images/archimatlogo.png'),
+                    //   fit: BoxFit.cover,
+                    //   // height: 160,
+                    //   width: 180,
+                    // ),
+                  ),
+                ),
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

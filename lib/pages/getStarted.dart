@@ -1,4 +1,4 @@
-import 'package:archi_mat/browseMaterial/browseMaterail.dart';
+import 'package:archi_mat/pages/browseMaterail.dart';
 import 'package:flutter/material.dart';
 import 'package:archi_mat/theme.dart';
 

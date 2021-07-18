@@ -1,4 +1,4 @@
-import 'package:archi_mat/browseMaterial/virtualMaterial2.dart';
+import 'package:archi_mat/pages/virtualMaterial2.dart';
 import 'package:archi_mat/pages/tab.dart';
 import 'package:flutter/material.dart';
 import 'package:archi_mat/theme.dart';
