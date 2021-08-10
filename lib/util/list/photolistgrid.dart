@@ -1,6 +1,6 @@
+import 'package:archi_mat/environment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../theme.dart';
 
@@ -58,224 +58,107 @@ class _PhotoListGrideState extends State<PhotoListGride> {
 
   @override
   Widget build(BuildContext context) {
+    dynamic width = MediaQuery.of(context).size.width;
+    // dynamic height = MediaQuery.of(context).size.height;
     return loader
         ? Center(child: CircularProgressIndicator())
-        : Container(
-            // height: MediaQuery.of(context).size.height,
-            // width: MediaQuery.of(context).size.width,
-            child: StaggeredGridView.countBuilder(
-                scrollDirection: Axis.vertical,
-                physics: NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                shrinkWrap: true,
-                itemCount: widget.data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  if (photos[index]['add'] == 0) {
-                    //for even row
-                    return Container(
-                      width: MediaQuery.of(context).size.width,
-                      // height: 200,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: AppTheme().grey),
-                          color: AppTheme().white),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: 145,
-                            decoration: BoxDecoration(
-                                // borderRadius: BorderRadius.only(
-                                //     topLeft: Radius.circular(15),
-                                //     topRight: Radius.circular(15)),
-                                border: Border(
-                                    bottom: BorderSide(color: AppTheme().grey)),
-                                image: DecorationImage(
-                                    image:
-                                        AssetImage(widget.data[index]['image']),
-                                    fit: BoxFit.cover)),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.data[index]['name'],
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      widget.data[index]['category'],
-                                      style:
-                                          TextStyle(color: AppTheme().l1black),
-                                    ),
-                                    Container(
-                                      width: 70,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                    color: AppTheme().grey)),
-                                            child: Icon(
-                                              Icons.star,
-                                              color: AppTheme().grey,
-                                              size: 15,
-                                            ),
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                    color: AppTheme().grey)),
-                                            child: Icon(
-                                              FontAwesomeIcons.leaf,
-                                              color: AppTheme().grey,
-                                              size: 10,
-                                            ),
-                                          ),
-                                          Container(
-                                              padding: EdgeInsets.all(5),
-                                              decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                      color: AppTheme().grey)),
-                                              child: Text(
-                                                'VR',
-                                                style: TextStyle(fontSize: 8),
-                                              )),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  } else {
-                    return Container(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      // height: 200,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: AppTheme().grey),
+        : StaggeredGridView.countBuilder(
+            scrollDirection: Axis.vertical,
+            physics: NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            shrinkWrap: true,
+            itemCount: widget.data.length,
+            itemBuilder: (BuildContext context, int index) {
+              // if (photos[index]['add'] == 0) {
+              //   //for even row
+              //   return ImageCard(
+              //     data: widget.data[index],
+              //     width: width,
+              //     height: 400.0,
+              //   );
+              // } else {
+              return ImageCard(
+                data: widget.data[index],
+                i: widget.i,
+                width: width * 0.5,
+                // height: 400.0,
+              );
+              // }
+            },
+            staggeredTileBuilder: (int index) {
+              print(photos[index]['add']);
+              if (photos[index]['add'] != 1) {
+                // return new StaggeredTile.fit(2);
+                return new StaggeredTile.count(2, 1);
+              } else {
+                return new StaggeredTile.count(1, 1);
+                // return new StaggeredTile.fit(1);
+              }
+            });
+  }
+}
 
-                          // borderRadius: BorderRadius.circular(15),
-                          color: AppTheme().white),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.5,
-                            height: 145,
-                            decoration: BoxDecoration(
-                                border: Border(
-                                    bottom: BorderSide(color: AppTheme().grey)),
-                                image: DecorationImage(
-                                    image:
-                                        AssetImage(widget.data[index]['image']),
-                                    fit: BoxFit.cover)),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.data[index]['name'],
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      widget.data[index]['category'],
-                                      style:
-                                          TextStyle(color: AppTheme().l1black),
-                                    ),
-                                    Container(
-                                      width: 70,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                    color: AppTheme().grey)),
-                                            child: Icon(
-                                              Icons.star,
-                                              color: AppTheme().grey,
-                                              size: 15,
-                                            ),
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.all(5),
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                    color: AppTheme().grey)),
-                                            child: Icon(FontAwesomeIcons.leaf,
-                                                size: 10,
-                                                color: AppTheme().grey),
-                                          ),
-                                          Container(
-                                              padding: EdgeInsets.all(5),
-                                              decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                      color: AppTheme().grey)),
-                                              child: Text(
-                                                'VR',
-                                                style: TextStyle(
-                                                    fontSize: 8,
-                                                    color: AppTheme().grey),
-                                              )),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                    //for odd row
+class ImageCard extends StatefulWidget {
+  final dynamic data;
+  final dynamic i;
+  final dynamic width;
+  final dynamic height;
+  const ImageCard({Key key, this.data, this.width, this.height, this.i})
+      : super(key: key);
 
-                  }
-                },
-                staggeredTileBuilder: (int index) {
-                  if (photos[index]['add'] != 1) {
-                    return new StaggeredTile.count(2, 1);
-                  } else {
-                    return new StaggeredTile.count(1, 1);
-                  }
-                }
-                // staggeredTileBuilder: (int index) {
-                //   if (photos[index]['add'] == 1) {
-                //     return new StaggeredTile.fit(2);
-                //   } else {
-                //     return new StaggeredTile.fit(1);
-                //   }
-                // },
-                // mainAxisSpacing: 4.0,
-                // crossAxisSpacing: 4.0,
+  @override
+  _ImageCardState createState() => _ImageCardState();
+}
+
+class _ImageCardState extends State<ImageCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // width: widget.width,
+      // height: widget.height,
+      decoration: BoxDecoration(
+          border: Border.all(color: AppTheme().grey), color: AppTheme().white),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            decoration:
+                BoxDecoration(border: Border.all(color: AppTheme().grey)),
+            child: widget.i == 1
+                ? Image.network(
+                    Config.url + widget.data['images'][0]['image'],
+                    width: MediaQuery.of(context).size.width,
+                    height: 134,
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    widget.data['image'],
+                    width: MediaQuery.of(context).size.width,
+                    height: 134,
+                    fit: BoxFit.cover,
+                  ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.data['name'],
+                  style: TextStyle(fontSize: 15),
                 ),
-          );
+                Text(
+                  widget.i != 1
+                      ? widget.data['category']
+                      : widget.data['category']['name'],
+                  // widget.data['category'],
+                  style: TextStyle(color: AppTheme().l1black),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

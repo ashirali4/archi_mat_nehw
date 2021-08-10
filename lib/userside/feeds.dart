@@ -54,10 +54,10 @@ class _FeedsState extends State<Feeds> {
         leading: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Container(
+            padding: EdgeInsets.all(5),
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: AppTheme().lblack, width: 1)),
-            // padding: EdgeInsets.only(left: 10),
+                border: Border.all(color: AppTheme().black)),
             child: SvgPicture.asset(
               'assets/images/menu.svg',
               color: AppTheme().l1black,

@@ -27,7 +27,7 @@ class _BusinessSettingState extends State<BusinessSetting> {
                   Navigator.pop(context);
                 },
               ),
-              Profilepic_Widgets(),
+              ProfilepicWidgets(),
               SizedBox(
                 height: 40,
               ),

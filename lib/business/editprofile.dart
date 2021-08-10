@@ -7,7 +7,8 @@ import 'package:archi_mat/util/widgets/profiletab.dart';
 import 'package:flutter/material.dart';
 
 class BusinessEditProfile extends StatefulWidget {
-  const BusinessEditProfile({Key key}) : super(key: key);
+  final dynamic data;
+  const BusinessEditProfile({Key key, this.data}) : super(key: key);
 
   @override
   _BusinessEditProfileState createState() => _BusinessEditProfileState();
@@ -15,6 +16,13 @@ class BusinessEditProfile extends StatefulWidget {
 
 class _BusinessEditProfileState extends State<BusinessEditProfile> {
   TextEditingController username = new TextEditingController();
+  @override
+  void initState() {
+    userdetail();
+    super.initState();
+  }
+
+  userdetail() {}
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,7 +38,9 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                   Navigator.pop(context);
                 },
               ),
-              Profilepic_Widgets(),
+              ProfilepicWidgets(
+                image: '',
+              ),
               SizedBox(
                 height: 40,
               ),
@@ -48,8 +58,8 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                     SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
+                    Expanded(
+                      // width: MediaQuery.of(context).size.width * 0.65,
                       // height: 20,
                       child: TextField(
                         keyboardType: TextInputType.text,
@@ -77,8 +87,8 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                     SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
+                    Expanded(
+                      // width: MediaQuery.of(context).size.width * 0.65,
                       // height: 20,
                       child: TextField(
                         keyboardType: TextInputType.text,
@@ -106,8 +116,8 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                     SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
+                    Expanded(
+                      // width: MediaQuery.of(context).size.width * 0.65,
                       // height: 20,
                       child: TextField(
                         keyboardType: TextInputType.text,
@@ -135,8 +145,8 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                     SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
+                    Expanded(
+                      // width: MediaQuery.of(context).size.width * 0.65,
                       // height: 20,
                       child: TextField(
                         keyboardType: TextInputType.text,
@@ -160,13 +170,13 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                     Container(
                       child: Text('Email'),
                       alignment: Alignment.topLeft,
-                      width: 60,
+                      width: 70,
                     ),
                     SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
+                    Expanded(
+                      // width: MediaQuery.of(context).size.width * 0.65,
                       // height: 20,
                       child: TextField(
                         keyboardType: TextInputType.text,
@@ -194,8 +204,8 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                     SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
+                    Expanded(
+                      // width: MediaQuery.of(context).size.width * 0.65,
                       // height: 20,
                       child: TextField(
                         keyboardType: TextInputType.text,
@@ -223,8 +233,8 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                     SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
+                    Expanded(
+                      // width: MediaQuery.of(context).size.width * 0.65,
                       // height: 20,
                       child: TextField(
                         keyboardType: TextInputType.text,
@@ -252,8 +262,8 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                     SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
+                    Expanded(
+                      // width: MediaQuery.of(context).size.width * 0.65,
                       // height: 20,
                       child: TextField(
                         keyboardType: TextInputType.text,
@@ -281,8 +291,8 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                     SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
+                    Expanded(
+                      // width: MediaQuery.of(context).size.width * 0.65,
                       // height: 20,
                       child: TextField(
                         keyboardType: TextInputType.text,
@@ -317,8 +327,8 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                     SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
+                    Expanded(
+                      // width: MediaQuery.of(context).size.width * 0.65,
                       // height: 20,
                       child: TextField(
                         keyboardType: TextInputType.text,
@@ -346,8 +356,8 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                     SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
+                    Expanded(
+                      // width: MediaQuery.of(context).size.width * 0.65,
                       // height: 20,
                       child: TextField(
                         keyboardType: TextInputType.text,
@@ -375,8 +385,8 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                     SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
+                    Expanded(
+                      // width: MediaQuery.of(context).size.width * 0.65,
                       // height: 20,
                       child: TextField(
                         keyboardType: TextInputType.text,
@@ -404,8 +414,8 @@ class _BusinessEditProfileState extends State<BusinessEditProfile> {
                     SizedBox(
                       width: 20,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.65,
+                    Expanded(
+                      // width: MediaQuery.of(context).size.width * 0.65,
                       // height: 20,
                       child: TextField(
                         keyboardType: TextInputType.text,

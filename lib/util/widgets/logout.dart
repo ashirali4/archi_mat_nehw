@@ -1,4 +1,6 @@
+import 'package:archi_mat/splash/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../theme.dart';
 
@@ -10,6 +12,7 @@ class Logou_button extends StatelessWidget {
     Key key,
     this.onclick,
   }) : super(key: key);
+  logout() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +21,24 @@ class Logou_button extends StatelessWidget {
         SizedBox(
           height: 40,
         ),
-        Container(
-          width: 150,
-          alignment: Alignment.center,
-          padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              border: Border.all(color: AppTheme().l1black, width: 1)),
-          child: Text('LOG OUT'),
+        InkWell(
+          onTap: () async {
+            SharedPreferences pref = await SharedPreferences.getInstance();
+            pref.clear();
+            pref.setString('new', 'new');
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => SplashScreen()),
+                (Route<dynamic> route) => false);
+          },
+          child: Container(
+            width: 150,
+            alignment: Alignment.center,
+            padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(color: AppTheme().l1black, width: 1)),
+            child: Text('LOG OUT'),
+          ),
         ),
         SizedBox(
           height: 20,

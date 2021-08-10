@@ -10,9 +10,9 @@ class List2 extends StatefulWidget {
 }
 
 class _List2State extends State<List2> {
+  int j = 0;
   @override
   Widget build(BuildContext context) {
-    int j = 0;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
@@ -48,7 +48,7 @@ class _List2State extends State<List2> {
                       border: Border.all(color: AppTheme().lblack, width: 1)),
               child: Text(
                 'New',
-                style: AppTheme().primaryTextStyle(false),
+                style: TextStyle(fontSize: 12),
               ),
             ),
           ),
@@ -70,7 +70,7 @@ class _List2State extends State<List2> {
                       border: Border.all(color: AppTheme().lblack, width: 1)),
               child: Text(
                 'Top',
-                style: AppTheme().primaryTextStyle(false),
+                style: TextStyle(fontSize: 12),
               ),
             ),
           ),
@@ -92,7 +92,7 @@ class _List2State extends State<List2> {
                       border: Border.all(color: AppTheme().lblack, width: 1)),
               child: Text(
                 'Minimalist',
-                style: AppTheme().primaryTextStyle(false),
+                style: TextStyle(fontSize: 12),
               ),
             ),
           ),
@@ -114,7 +114,7 @@ class _List2State extends State<List2> {
                       border: Border.all(color: AppTheme().lblack, width: 1)),
               child: Text(
                 'Eco',
-                style: AppTheme().primaryTextStyle(false),
+                style: TextStyle(fontSize: 12),
               ),
             ),
           ),

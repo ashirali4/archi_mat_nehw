@@ -23,7 +23,7 @@ class _InstListState extends State<InstList> {
           bold: false,
         ),
         Container(
-          height: 150,
+          height: 180,
           color: AppTheme().white,
           child:
               // loader

@@ -1,5 +1,6 @@
 import 'package:archi_mat/pages/virtualMaterial2.dart';
 import 'package:archi_mat/pages/tab.dart';
+import 'package:archi_mat/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:archi_mat/theme.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -18,10 +19,10 @@ class _VirtualMaterialScreen2State extends State<VirtualMaterialScreen2> {
 
   double currentIndex = 0;
   List<String> items = [
-    'assets/images/card.png',
-    'assets/images/card.png',
+    'assets/images/back.png',
+    'assets/images/back.png',
 
-    'assets/images/card.png',
+    'assets/images/back.png',
 
     //  'assets/images/2.png',
     //  'assets/images/3.png'
@@ -36,8 +37,9 @@ class _VirtualMaterialScreen2State extends State<VirtualMaterialScreen2> {
       //       ),
       child: CarouselSlider(
         options: CarouselOptions(
-          height: 210.0,
+          height: 500.0,
           autoPlay: true,
+          viewportFraction: 1,
           onPageChanged: (index, reason) => {
             this.setState(() {
               currentIndex = index.toDouble();
@@ -52,7 +54,10 @@ class _VirtualMaterialScreen2State extends State<VirtualMaterialScreen2> {
                   width: MediaQuery.of(context).size.width,
                   margin: EdgeInsets.symmetric(horizontal: 5.0),
                   child: Image(
+                    width: 400,
+                    // height: 500,
                     image: AssetImage(i),
+                    fit: BoxFit.fill,
                   ));
             },
           );
@@ -70,12 +75,9 @@ class _VirtualMaterialScreen2State extends State<VirtualMaterialScreen2> {
             children: <Widget>[
               Container(
                 height: MediaQuery.of(context).size.height,
-                color: AppTheme().purple,
+                color: AppTheme().white,
               ),
-              Container(
-                height: MediaQuery.of(context).size.height,
-                color: Colors.black12,
-              ),
+
               // Image(
               //   image: AssetImage('assets/images/splashbg.png'),
               //   fit: BoxFit.fitHeight,
@@ -99,7 +101,7 @@ class _VirtualMaterialScreen2State extends State<VirtualMaterialScreen2> {
                                     IconButton(
                                       icon: Icon(
                                         Icons.arrow_back_ios,
-                                        color: AppTheme().white,
+                                        color: AppTheme().grey,
                                       ),
                                       onPressed: () {
                                         Navigator.pop(context);
@@ -112,14 +114,15 @@ class _VirtualMaterialScreen2State extends State<VirtualMaterialScreen2> {
                                                 MaterialPageRoute(
                                                     builder:
                                                         (context) =>
-                                                            TabPage(index: 0)),
+                                                            SplashScreen()),
                                                 (Route<dynamic> route) =>
                                                     false);
                                       },
                                       child: Text(
                                         'SKIP',
-                                        style:
-                                            TextStyle(color: AppTheme().white),
+                                        style: TextStyle(
+                                          color: AppTheme().grey,
+                                        ),
                                       ),
                                     )
                                   ]),
@@ -129,11 +132,11 @@ class _VirtualMaterialScreen2State extends State<VirtualMaterialScreen2> {
                               child: Column(children: [
                                 Center(
                                   child: Text(
-                                    'View Your \nVirtual Materials',
+                                    'View \nVirtual Shops',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 32,
-                                        color: AppTheme().white,
+                                        color: Colors.black54,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -144,14 +147,14 @@ class _VirtualMaterialScreen2State extends State<VirtualMaterialScreen2> {
                                     alignment: Alignment.centerLeft,
                                     width: 40,
                                     height: 1.5,
-                                    color: AppTheme().white,
+                                    color: Colors.black54,
                                   ),
                                 ),
                                 Text(
-                                  'Select your color platette',
+                                  'World of Architectural & \nBuilding Materials',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: AppTheme().white, fontSize: 20),
+                                      color: Colors.black54, fontSize: 20),
                                 ),
                                 SizedBox(
                                   height: 30,
@@ -195,9 +198,9 @@ class _VirtualMaterialScreen2State extends State<VirtualMaterialScreen2> {
                               decoration: BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
-                                        blurRadius: 5,
-                                        spreadRadius: 4,
-                                        color: Colors.black12),
+                                        blurRadius: 2,
+                                        spreadRadius: 2,
+                                        color: Colors.black54),
                                   ],
                                   color: AppTheme().white,
                                   borderRadius: BorderRadius.circular(25)),

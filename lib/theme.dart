@@ -8,6 +8,7 @@ class AppTheme {
   Color lightblack = Colors.black12;
   Color lblack = Colors.black38;
   Color l1black = Colors.black54;
+  Color l2black = Colors.black87;
   Color blue = Colors.blue;
   Color whiteopacity = Colors.white.withOpacity(0.5);
   Color whiteopacity1 = Colors.white.withOpacity(0.8);
@@ -26,7 +27,7 @@ class AppTheme {
   // Primary Text Style
   TextStyle primaryTextStyle(bool i) {
     return TextStyle(
-      fontSize: 12,
+      fontSize: 10,
       color: !i ? black : white,
     );
   }

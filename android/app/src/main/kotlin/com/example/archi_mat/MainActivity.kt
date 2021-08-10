@@ -1,4 +1,4 @@
-package com.example.archi_mat
+package com.archimat
 
 import io.flutter.embedding.android.FlutterActivity
 

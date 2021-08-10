@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "359586488721",
+    "project_id": "archimat-fa54f",
+    "storage_bucket": "archimat-fa54f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359586488721:android:8cc94f57437084a4113a30",
+        "android_client_info": {
+          "package_name": "com.archimat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359586488721-vnkahlqch9hrc84o7q6u0g74lsh8i2cr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdC5Bu3y2K-Sfa5V4FfcsOoUMECIvlf-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359586488721-vnkahlqch9hrc84o7q6u0g74lsh8i2cr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,13 +1,17 @@
+import 'package:archi_mat/pages/inbox.dart';
+import 'package:archi_mat/userside/category.dart';
 import 'package:archi_mat/userside/feeds.dart';
 import 'package:archi_mat/userside/homepage.dart';
 import 'package:archi_mat/theme.dart';
 import 'package:archi_mat/userside/setting.dart';
+import 'package:archi_mat/userside/shophome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class TabPage extends StatefulWidget {
   final int index;
-  TabPage({@required this.index});
+  final dynamic data;
+  TabPage({@required this.index, this.data});
   @override
   _TabPageState createState() => _TabPageState();
 }
@@ -34,13 +38,22 @@ class _TabPageState extends State<TabPage> {
       return AnimatedContainer(
           color: AppTheme().white,
           duration: Duration(seconds: 1),
-          child: HomePage());
+          child: widget.data != null
+              ? ShopHomePage(
+                  data: widget.data,
+                  shop: true,
+                )
+              : HomePage());
     }
     if (_page == 1) {
       return AnimatedContainer(
         color: AppTheme().white,
         duration: Duration(seconds: 1),
-        child: Container(),
+        child: widget.data != null
+            ? Inbox()
+            : CategoryPage(
+                dat1: false,
+              ),
       );
     }
 
@@ -54,7 +67,7 @@ class _TabPageState extends State<TabPage> {
       return AnimatedContainer(
           color: AppTheme().white,
           duration: Duration(seconds: 1),
-          child: UserSetting());
+          child: Container());
     }
     if (_page == 4) {
       return AnimatedContainer(
@@ -145,13 +158,15 @@ class _TabPageState extends State<TabPage> {
                     Padding(
                       padding: const EdgeInsets.only(top: 15, bottom: 3),
                       child: SvgPicture.asset(
-                        'assets/images/category.svg',
+                        widget.data != null
+                            ? 'assets/images/message.svg'
+                            : 'assets/images/category.svg',
                         width: 25,
                         color: _page == 1 ? AppTheme().purple : AppTheme().grey,
                       ),
                     ),
                     Text(
-                      'Category',
+                      widget.data != null ? 'Chat' : 'Category',
                       style: TextStyle(
                         color: _page == 1 ? AppTheme().purple : AppTheme().grey,
                         fontSize: 12,

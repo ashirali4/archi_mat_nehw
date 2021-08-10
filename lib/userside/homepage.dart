@@ -1,11 +1,15 @@
-import 'package:archi_mat/business/home.dart';
-import 'package:archi_mat/business/setting.dart';
+import 'package:archi_mat/Services/categoryService.dart';
+import 'package:archi_mat/Services/productService.dart';
+import 'package:archi_mat/Services/service.dart';
+import 'package:archi_mat/pages/drawer.dart';
 import 'package:archi_mat/theme.dart';
 import 'package:archi_mat/util/list/categorylist.dart';
 import 'package:archi_mat/util/list/instagram.dart';
 import 'package:archi_mat/util/list/photolistgrid.dart';
 import 'package:archi_mat/util/list/productlist.dart';
 import 'package:archi_mat/util/slider/slider.dart';
+import 'package:archi_mat/util/slider/slider1.dart';
+
 import 'package:archi_mat/util/widgets/list.dart';
 import 'package:archi_mat/util/widgets/list2.dart';
 import 'package:archi_mat/util/widgets/title.dart';
@@ -21,6 +25,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int i = 0, j = 0;
+  List category = [], product1 = [], service = [], slider = [];
+
+  bool loader = true;
   List professional = [
     {'image': 'assets/images/card2.png', 'name': 'Architects'},
     {'image': 'assets/images/card10.png', 'name': 'Interior Designer'},
@@ -48,6 +55,78 @@ class _HomePageState extends State<HomePage> {
     'assets/images/card4.png',
     'assets/images/card6.png'
   ];
+
+  getcategory() {
+    setState(() {
+      loader = true;
+    });
+    CategoryService().getcategory().then((value) {
+      print(value);
+      setState(() {
+        if (value != null) {
+          // var data = jsonDecode(value);
+          var data = value;
+          print(data['arks']);
+          category = data['arks'];
+          // loader = false;
+        }
+      });
+    });
+  }
+
+  getproduct() {
+    // setState(() {
+    //   loader = true;
+    // });
+
+    ProductService().getproduct().then((value) {
+      print(value);
+      setState(() {
+        if (value != null) {
+          var data = value;
+          print(data['arks']);
+          product1 = data['arks'];
+          // loader = false;
+        }
+      });
+    });
+  }
+
+  getservice() {
+    // setState(() {
+    //   loader = true;
+    // });
+
+    ServiceRoute().getservice().then((value) {
+      print(value);
+      setState(() {
+        if (value != null) {
+          var data = value;
+          print(data['arks']);
+          service = data['arks'];
+          // loader = false;
+        }
+      });
+    });
+  }
+
+  getslider() {
+    setState(() {
+      loader = true;
+    });
+
+    ProductService().getslider().then((value) {
+      print(value);
+      setState(() {
+        if (value != null) {
+          var data = value;
+          print(data['arks']);
+          slider = data['arks'];
+          loader = false;
+        }
+      });
+    });
+  }
 
   List product = [
     {
@@ -81,105 +160,132 @@ class _HomePageState extends State<HomePage> {
       'category': 'Shop'
     },
   ];
+
+  @override
+  void initState() {
+    getcategory();
+    getproduct();
+    getservice();
+    getslider();
+    super.initState();
+  }
+
+  var scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppTheme().white,
-        leading: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Container(
-            // padding: EdgeInsets.only(left: 10),
-            child: SvgPicture.asset(
-              'assets/images/menu.svg',
-              color: AppTheme().l1black,
-              width: 20,
+    return SafeArea(
+      child: Scaffold(
+        key: scaffoldKey,
+        drawer: Menu2(),
+        appBar: AppBar(
+          backgroundColor: AppTheme().white,
+          leading: GestureDetector(
+            onTap: () => scaffoldKey.currentState.openDrawer(),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: AppTheme().black)),
+                child: SvgPicture.asset(
+                  'assets/images/menu.svg',
+                  color: AppTheme().l1black,
+                  width: 20,
+                ),
+              ),
             ),
           ),
+          title: Image(
+            image: AssetImage('assets/images/archimat.png'),
+            width: 150,
+            height: 100,
+          ),
+          centerTitle: true,
+          // actions: <Widget>[
+          //   Padding(
+          //     padding: const EdgeInsets.only(right: 15),
+          //     child: SvgPicture.asset(
+          //       'assets/images/search.svg',
+          //       color: AppTheme().l1black,
+          //       width: 20,
+          //     ),
+          //   )
+          // ],
         ),
-        title: Image(
-          image: AssetImage('assets/images/archimat.png'),
-          width: 150,
-          height: 100,
-        ),
-        centerTitle: true,
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 15),
-            child: SvgPicture.asset(
-              'assets/images/search.svg',
-              color: AppTheme().l1black,
-              width: 20,
-            ),
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SliderPage(
-              text: false,
-            ),
-            List1(),
-            // SizedBox(
-            //   height: 20,
-            // ),
-            CategoryList(),
-
-            Productlist(
-              onclick: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => BusinessHome()));
-              },
-              i: 0,
-              data: product,
-              title: 'Find Materials Around You',
-            ),
-            SliderPage(
-              text: true,
-            ),
-            Productlist(
-              i: 1,
-              data: product,
-              title: 'Find Virtual Shops',
-            ),
-            Productlist(
-              i: 2,
-              data: product,
-              title: 'Find AR Product',
-            ),
-            Productlist(
-              i: 0,
-              data: product,
-              title: 'Find Professional Services',
-            ),
-            SliderPage(text: true),
-            Productlist(
-              i: 0,
-              data: product,
-              title: 'Find Interactive Events',
-            ),
-            Title_Widgets(
-              bold: false,
-              text: 'Latest Feed',
-            ),
-            List2(),
-            PhotoListGride(
-              i: 0,
-              count: 2,
-              data: product,
-              title: 'Find Interactive Events',
-            ),
-            InstList(
-              data: product,
-              title: 'Instagram #archimat.xr',
-            ),
-            SizedBox(
-              height: 20,
-            )
-          ],
-        ),
+        body: loader
+            ? Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SliderPage(
+                      text: false,
+                      data: slider,
+                    ),
+                    List1(),
+                    CategoryList(
+                      category: category,
+                      subcategory: false,
+                    ),
+                    Productlist(
+                      // onclick: () {
+                      //   Navigator.push(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => ProductDetail()));
+                      // },
+                      i: 3,
+                      data: product1,
+                      title: 'Find Materials Around You',
+                    ),
+                    Slider1Page(
+                      data: slider,
+                    ),
+                    Productlist(
+                      i: 1,
+                      data: product,
+                      title: 'Find Virtual Shops',
+                    ),
+                    Productlist(
+                      i: 2,
+                      data: product,
+                      title: 'Find AR Product',
+                    ),
+                    Productlist(
+                      i: 4,
+                      data: service,
+                      title: 'Find Professional Services',
+                    ),
+                    Slider1Page(
+                      data: slider,
+                    ),
+                    Productlist(
+                      i: 0,
+                      data: product,
+                      title: 'Find Interactive Events',
+                    ),
+                    Title_Widgets(
+                      bold: false,
+                      text: 'Latest Feed',
+                    ),
+                    List2(),
+                    PhotoListGride(
+                      i: 0,
+                      count: 2,
+                      data: product,
+                      title: 'Find Interactive Events',
+                    ),
+                    InstList(
+                      data: product,
+                      title: 'Instagram #archimat.xr',
+                    ),
+                    SizedBox(
+                      height: 20,
+                    )
+                  ],
+                ),
+              ),
       ),
     );
   }

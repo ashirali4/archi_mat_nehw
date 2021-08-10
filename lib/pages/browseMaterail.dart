@@ -1,7 +1,9 @@
 import 'package:archi_mat/pages/viewVirtualMaterial.dart';
-import 'package:archi_mat/pages/tab.dart';
+import 'package:archi_mat/splash/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:archi_mat/theme.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 
 class VirtualMaterialScreen1 extends StatefulWidget {
   @override
@@ -14,139 +16,53 @@ class _VirtualMaterialScreen1State extends State<VirtualMaterialScreen1> {
     super.initState();
   }
 
-  final List items = [
-    {'img': 'assets/images/mask.png', 'name': 'Glass', 'desc': 'OCEAN BEACH'},
-    {'img': 'assets/images/2.png', 'name': 'Paint ', 'desc': 'TORREY PINES'},
-    {'img': 'assets/images/3.png', 'name': 'Yoga', 'desc': 'SOLONA BEACH'},
+  double currentIndex = 0;
+  List<String> items = [
+    'assets/images/back.png',
+    'assets/images/back.png',
+
+    'assets/images/back.png',
+
+    //  'assets/images/2.png',
+    //  'assets/images/3.png'
   ];
 
   Widget slider() {
     return Container(
-        height: 200.0,
-        child: ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: this.items.length,
-          itemBuilder: (BuildContext context, i) => GestureDetector(
-            onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) =>
-              //           ItemDetailPage(text: this.item2[i])),
-              // );
+      height: 220.0,
+
+      // decoration: BoxDecoration(
+      //         color:AppTheme().white,
+      //       ),
+      child: CarouselSlider(
+        options: CarouselOptions(
+          height: 500.0,
+          autoPlay: true,
+          viewportFraction: 1,
+          onPageChanged: (index, reason) => {
+            this.setState(() {
+              currentIndex = index.toDouble();
+            }),
+          },
+        ),
+        items: items.map((i) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                  padding: EdgeInsets.all(15),
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Image(
+                    width: 400,
+                    // height: 500,
+                    image: AssetImage(i),
+                    fit: BoxFit.fill,
+                  ));
             },
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 0, 10),
-              child: Container(
-                width: 150,
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  color: Colors.white,
-                  elevation: 3,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Stack(
-                        children: <Widget>[
-                          Container(
-                              width: 150,
-                              height: 180,
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)),
-                              )),
-                          Container(
-                            width: 150,
-                            height: 110,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                    items[i]['img'],
-                                  ),
-                                  fit: BoxFit.cover),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 130),
-                            child: Column(
-                              children: [
-                                Center(
-                                  child: Container(
-                                    // width: 90,
-                                    child: Text(
-                                      items[i]['name'],
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        color: Color(0xFF0E3746),
-                                      ),
-                                      textScaleFactor: 1.0,
-                                    ),
-                                  ),
-                                ),
-                                Center(
-                                  child: Container(
-                                    // width: 90,
-                                    child: Text(
-                                      items[i]['desc'],
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        color: Color(0xFF0E3746),
-                                      ),
-                                      textScaleFactor: 1.0,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 54,
-                            right: 55,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(50)),
-                                boxShadow: [
-                                  BoxShadow(
-                                      blurRadius: 3,
-                                      spreadRadius: 4,
-                                      color: Colors.black12),
-                                ],
-                              ),
-                              child: CircleAvatar(
-                                radius: 17,
-                                backgroundColor: AppTheme().white,
-                                child: Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
-                                    image: DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/1_surf.png'),
-                                        fit: BoxFit.cover),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ));
+          );
+        }).toList(),
+      ),
+    );
   }
 
   @override
@@ -158,12 +74,9 @@ class _VirtualMaterialScreen1State extends State<VirtualMaterialScreen1> {
             children: <Widget>[
               Container(
                 height: MediaQuery.of(context).size.height,
-                color: AppTheme().virtualbg.withOpacity(0.4),
+                color: AppTheme().white,
               ),
-              Container(
-                height: MediaQuery.of(context).size.height,
-                color: Colors.black38,
-              ),
+
               // Image(
               //   image: AssetImage('assets/images/splashbg.png'),
               //   fit: BoxFit.fitHeight,
@@ -179,20 +92,19 @@ class _VirtualMaterialScreen1State extends State<VirtualMaterialScreen1> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 15, vertical: 5),
+                                  horizontal: 15, vertical: 15),
                               child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
-                                    IconButton(
-                                      icon: Icon(
-                                        Icons.arrow_back_ios,
-                                        color: AppTheme().white,
-                                      ),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                    ),
+                                    // IconButton(
+                                    //   icon: Icon(
+                                    //     Icons.arrow_back_ios,
+                                    //     color: AppTheme().grey,
+                                    //   ),
+                                    //   onPressed: () {
+                                    //     Navigator.pop(context);
+                                    //   },
+                                    // ),
                                     InkWell(
                                       onTap: () {
                                         Navigator.of(context)
@@ -200,14 +112,15 @@ class _VirtualMaterialScreen1State extends State<VirtualMaterialScreen1> {
                                                 MaterialPageRoute(
                                                     builder:
                                                         (context) =>
-                                                            TabPage(index: 0)),
+                                                            SplashScreen()),
                                                 (Route<dynamic> route) =>
                                                     false);
                                       },
                                       child: Text(
                                         'SKIP',
-                                        style:
-                                            TextStyle(color: AppTheme().white),
+                                        style: TextStyle(
+                                          color: AppTheme().grey,
+                                        ),
                                       ),
                                     )
                                   ]),
@@ -217,11 +130,11 @@ class _VirtualMaterialScreen1State extends State<VirtualMaterialScreen1> {
                               child: Column(children: [
                                 Center(
                                   child: Text(
-                                    'Explore \nNew Things',
+                                    'View AR \nProduct',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 32,
-                                        color: AppTheme().white,
+                                        color: Colors.black54,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -232,19 +145,38 @@ class _VirtualMaterialScreen1State extends State<VirtualMaterialScreen1> {
                                     alignment: Alignment.centerLeft,
                                     width: 40,
                                     height: 1.5,
-                                    color: AppTheme().white,
+                                    color: Colors.black54,
                                   ),
                                 ),
                                 Text(
                                   'World of Architectural & \nBuilding Materials',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      color: AppTheme().white, fontSize: 20),
+                                      color: Colors.black54, fontSize: 20),
                                 ),
                                 SizedBox(
                                   height: 30,
                                 ),
                                 Container(child: slider()),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                Center(
+                                  // alignment: Alignment.center,
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    child: new DotsIndicator(
+                                      dotsCount: items.length,
+                                      position: currentIndex,
+                                      decorator: DotsDecorator(
+                                        spacing:
+                                            EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                        color: Colors.grey, // Inactive color
+                                        activeColor: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ]),
                             ),
                           ]),
@@ -264,9 +196,9 @@ class _VirtualMaterialScreen1State extends State<VirtualMaterialScreen1> {
                               decoration: BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
-                                        blurRadius: 5,
-                                        spreadRadius: 4,
-                                        color: Colors.black12),
+                                        blurRadius: 2,
+                                        spreadRadius: 2,
+                                        color: Colors.black54),
                                   ],
                                   color: AppTheme().white,
                                   borderRadius: BorderRadius.circular(25)),

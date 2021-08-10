@@ -11,7 +11,7 @@ class Divider_Widgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Divider(
-      color: AppTheme().grey,
+      color: AppTheme().l1black,
       thickness: 1,
       height: 1,
     );

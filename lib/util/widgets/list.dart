@@ -11,9 +11,9 @@ class List1 extends StatefulWidget {
 }
 
 class _List1State extends State<List1> {
+  int i = 0;
   @override
   Widget build(BuildContext context) {
-    int i = 0;
     return Column(
       children: [
         Divider_Widgets(),
@@ -24,12 +24,16 @@ class _List1State extends State<List1> {
             children: [
               GestureDetector(
                 onTap: () {
+                  print(i.toString());
                   setState(() {
                     i = 0;
+                    print(i.toString());
                   });
                 },
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  alignment: Alignment.center,
+                  width: i == 0 ? 90 : 50,
                   decoration: i != 0
                       ? BoxDecoration(
                           color: AppTheme().white,
@@ -41,7 +45,9 @@ class _List1State extends State<List1> {
                               Border.all(color: AppTheme().lblack, width: 1)),
                   child: Text(
                     'Shops',
-                    style: AppTheme().primaryTextStyle(false),
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
                   ),
                 ),
               ),
@@ -49,10 +55,13 @@ class _List1State extends State<List1> {
                 onTap: () {
                   setState(() {
                     i = 1;
+                    print(i.toString());
                   });
                 },
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  alignment: Alignment.center,
+                  width: i == 1 ? 90 : 50,
                   decoration: i != 1
                       ? BoxDecoration(
                           color: AppTheme().white,
@@ -64,7 +73,9 @@ class _List1State extends State<List1> {
                               Border.all(color: AppTheme().lblack, width: 1)),
                   child: Text(
                     'Products',
-                    style: AppTheme().primaryTextStyle(false),
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
                   ),
                 ),
               ),
@@ -72,10 +83,13 @@ class _List1State extends State<List1> {
                 onTap: () {
                   setState(() {
                     i = 2;
+                    print(i.toString());
                   });
                 },
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  alignment: Alignment.center,
+                  width: i == 2 ? 90 : 50,
                   decoration: i != 2
                       ? BoxDecoration(
                           color: AppTheme().white,
@@ -87,7 +101,9 @@ class _List1State extends State<List1> {
                               Border.all(color: AppTheme().lblack, width: 1)),
                   child: Text(
                     'Services',
-                    style: AppTheme().primaryTextStyle(false),
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
                   ),
                 ),
               ),
@@ -98,7 +114,9 @@ class _List1State extends State<List1> {
                   });
                 },
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                  padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  alignment: Alignment.center,
+                  width: i == 3 ? 90 : 50,
                   decoration: i != 3
                       ? BoxDecoration(
                           color: AppTheme().white,
@@ -110,7 +128,9 @@ class _List1State extends State<List1> {
                               Border.all(color: AppTheme().lblack, width: 1)),
                   child: Text(
                     'Events',
-                    style: AppTheme().primaryTextStyle(false),
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
                   ),
                 ),
               ),

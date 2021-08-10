@@ -7,10 +7,9 @@ import 'package:archi_mat/util/widgets/profilepic.dart';
 import 'package:archi_mat/util/widgets/profiletab.dart';
 import 'package:flutter/material.dart';
 
-import '../theme.dart';
-
 class UserSetting extends StatefulWidget {
-  const UserSetting({Key key}) : super(key: key);
+  final dynamic data;
+  const UserSetting({Key key, this.data}) : super(key: key);
 
   @override
   _UserSettingState createState() => _UserSettingState();
@@ -19,10 +18,9 @@ class UserSetting extends StatefulWidget {
 class _UserSettingState extends State<UserSetting> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.89,
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Column(
             children: [
               Back_Widgets(
@@ -30,7 +28,9 @@ class _UserSettingState extends State<UserSetting> {
                   Navigator.pop(context);
                 },
               ),
-              Profilepic_Widgets(),
+              ProfilepicWidgets(
+                image: widget.data['image'],
+              ),
               SizedBox(
                 height: 40,
               ),
@@ -42,7 +42,7 @@ class _UserSettingState extends State<UserSetting> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => BusinessEditProfile()));
+                          builder: (context) => UserEditProfile()));
                 },
               ),
               ProfileTab(
@@ -79,7 +79,10 @@ class _UserSettingState extends State<UserSetting> {
                 text: 'Support Center',
                 onclick: () {},
               ),
-              Logou_button()
+              Logou_button(),
+              SizedBox(
+                height: 20,
+              )
             ],
           ),
         ),
