@@ -3,7 +3,6 @@ import 'package:archi_mat/userside/category.dart';
 import 'package:archi_mat/userside/feeds.dart';
 import 'package:archi_mat/userside/homepage.dart';
 import 'package:archi_mat/theme.dart';
-import 'package:archi_mat/userside/setting.dart';
 import 'package:archi_mat/userside/shophome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -50,7 +49,9 @@ class _TabPageState extends State<TabPage> {
         color: AppTheme().white,
         duration: Duration(seconds: 1),
         child: widget.data != null
-            ? Inbox()
+            ? Inbox(
+                shopside: true,
+              )
             : CategoryPage(
                 dat1: false,
               ),

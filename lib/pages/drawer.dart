@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:archi_mat/business/home.dart';
 import 'package:archi_mat/pages/inbox.dart';
 import 'package:archi_mat/theme.dart';
 import 'package:archi_mat/userside/setting.dart';
@@ -134,7 +132,11 @@ class _Menu2State extends State<Menu2> {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => Inbox()));
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Inbox(
+                              shopside: false,
+                            )));
               },
             ),
             // Divider(

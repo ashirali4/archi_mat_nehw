@@ -3,9 +3,10 @@ import 'dart:convert';
 import 'package:archi_mat/theme.dart';
 import 'package:archi_mat/util/widgets/back.dart';
 import 'package:archi_mat/util/widgets/divider.dart';
-import 'package:archi_mat/util/widgets/logout.dart';
 import 'package:archi_mat/util/widgets/profilepic.dart';
 import 'package:flutter/material.dart';
+import 'package:gender_picker/source/enums.dart';
+import 'package:gender_picker/source/gender_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserEditProfile extends StatefulWidget {
@@ -17,8 +18,17 @@ class UserEditProfile extends StatefulWidget {
 
 class _UserEditProfileState extends State<UserEditProfile> {
   TextEditingController username = new TextEditingController();
+  TextEditingController lname = new TextEditingController();
+  TextEditingController fname = new TextEditingController();
+  TextEditingController phone = new TextEditingController();
+  TextEditingController email = new TextEditingController();
   String image = '';
+  var countrycode = '+92';
   var detail;
+  var newphone, gender;
+  Gender _gender;
+  DateTime selectedDate = DateTime.now();
+  // var gender;
   bool loader = true;
   @override
   void initState() {
@@ -33,10 +43,37 @@ class _UserEditProfileState extends State<UserEditProfile> {
       if (detail != null) {
         setState(() {
           image = detail['image'];
+          fname.text = detail['firstname'];
+          lname.text = detail['lastname'];
+          email.text = detail['email'];
+          phone.text = detail['phoneNo'];
+          if (detail['gender'] == 'Male' || detail['gender'] == 'male') {
+            _gender = Gender.Male;
+          } else if (detail['gender'] == 'Female' ||
+              detail['gender'] == 'female') {
+            _gender = Gender.Female;
+          } else {
+            _gender = Gender.Others;
+          }
+          print(_gender);
+          selectedDate = DateTime.parse(detail['dateofbirth']);
+
           loader = false;
         });
       }
     });
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1955, 8),
+        lastDate: DateTime.now());
+    if (picked != null && picked != selectedDate)
+      setState(() {
+        selectedDate = picked;
+      });
   }
 
   @override
@@ -76,9 +113,7 @@ class _UserEditProfileState extends State<UserEditProfile> {
                         SizedBox(
                           width: 20,
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.65,
-                          // height: 20,
+                        Expanded(
                           child: TextField(
                             keyboardType: TextInputType.text,
                             controller: username,
@@ -105,12 +140,10 @@ class _UserEditProfileState extends State<UserEditProfile> {
                         SizedBox(
                           width: 20,
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.65,
-                          // height: 20,
+                        Expanded(
                           child: TextField(
                             keyboardType: TextInputType.text,
-                            controller: username,
+                            controller: fname,
                             decoration: InputDecoration(
                                 hintText: 'First Name',
                                 hintStyle: TextStyle(color: Colors.grey),
@@ -134,12 +167,10 @@ class _UserEditProfileState extends State<UserEditProfile> {
                         SizedBox(
                           width: 20,
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.65,
-                          // height: 20,
+                        Expanded(
                           child: TextField(
                             keyboardType: TextInputType.text,
-                            controller: username,
+                            controller: lname,
                             decoration: InputDecoration(
                                 hintText: 'Last Name',
                                 hintStyle: TextStyle(color: Colors.grey),
@@ -150,59 +181,88 @@ class _UserEditProfileState extends State<UserEditProfile> {
                     ),
                   ),
                   Divider_Widgets(),
-                  Padding(
+                  // Padding(
+                  //   padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       Container(
+                  //         child: Text('Gender'),
+                  //         alignment: Alignment.topLeft,
+                  //         width: 70,
+                  //       ),
+                  //       // SizedBox(
+                  //       //   width: 20,
+                  //       // ),
+                  //       // Expanded(
+                  //       //   child: TextField(
+                  //       //     keyboardType: TextInputType.text,
+                  //       //     controller: username,
+                  //       //     decoration: InputDecoration(
+                  //       //         hintText: 'Gender',
+                  //       //         hintStyle: TextStyle(color: Colors.grey),
+                  //       //         border: InputBorder.none),
+                  //       //   ),
+                  //       // )
+                  //     ],
+                  //   ),
+                  // ),
+                  Container(
                     padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          child: Text('Gender'),
-                          alignment: Alignment.topLeft,
-                          width: 70,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.65,
-                          // height: 20,
-                          child: TextField(
-                            keyboardType: TextInputType.text,
-                            controller: username,
-                            decoration: InputDecoration(
-                                hintText: 'Gender',
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: InputBorder.none),
-                          ),
-                        )
-                      ],
-                    ),
+                    child: Text('Gender'),
+                    alignment: Alignment.topLeft,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                  GenderPickerWithImage(
+                    showOtherGender: true,
+                    verticalAlignedText: true,
+                    selectedGender: Gender.Male,
+                    selectedGenderTextStyle: TextStyle(
+                        color: Color(0xFF8b32a8), fontWeight: FontWeight.bold),
+                    unSelectedGenderTextStyle: TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.normal),
+                    onChanged: (Gender val) {
+                      print(val);
+                      setState(() {
+                        if (val == Gender.Male) {
+                          gender = 'Male';
+                        } else if (val == Gender.Female) {
+                          gender = 'Female';
+                        } else {
+                          gender = 'Other';
+                        }
+                      });
+                    },
+                    equallyAligned: true,
+                    animationDuration: Duration(milliseconds: 300),
+                    isCircular: true,
+                    // default : true,
+                    opacityOfGradient: 0.4,
+                    padding: const EdgeInsets.all(3),
+                    size: 50, //default : 40
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   Divider_Widgets(),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+                    padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
                           child: Text('D.O.B'),
                           alignment: Alignment.topLeft,
-                          width: 60,
+                          width: 70,
                         ),
                         SizedBox(
                           width: 20,
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.65,
-                          // height: 20,
-                          child: TextField(
-                            keyboardType: TextInputType.text,
-                            controller: username,
-                            decoration: InputDecoration(
-                                hintText: 'Day/Month',
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: InputBorder.none),
-                          ),
+                        Expanded(
+                          child: InkWell(
+                              onTap: () => _selectDate(context),
+                              child: Text(
+                                  "${selectedDate.toLocal()}".split(' ')[0])),
                         )
                       ],
                     ),
@@ -221,18 +281,49 @@ class _UserEditProfileState extends State<UserEditProfile> {
                         SizedBox(
                           width: 20,
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.65,
-                          // height: 20,
-                          child: TextField(
-                            keyboardType: TextInputType.text,
-                            controller: username,
-                            decoration: InputDecoration(
-                                hintText: 'Xxxxxxx',
-                                hintStyle: TextStyle(color: Colors.grey),
-                                border: InputBorder.none),
-                          ),
-                        )
+                        Expanded(
+                            child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                              // CountryCodePicker(
+                              //   padding: EdgeInsets.all(0),
+                              //   showFlag: true,
+                              //   initialSelection: 'PK',
+                              //   // favorite: ['+92', 'PK'],
+                              //   onChanged: (code) {
+                              //     this.countrycode = code.toString();
+                              //     print(countrycode);
+                              //   },
+                              // ),
+                              // Container(
+                              //   height: 30.0,
+                              //   width: 1.0,
+                              //   color: Colors.blue,
+                              //   margin: const EdgeInsets.only(
+                              //       left: 10.0, right: 10.0),
+                              // ),
+                              Expanded(
+                                child: TextField(
+                                  enabled: false,
+                                  controller: phone,
+                                  keyboardType: TextInputType.phone,
+                                  decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintText: "Phone Number",
+                                  ),
+                                  onChanged: (value) {
+                                    if (phone.text.isNotEmpty) {
+                                      if (value[0] != '0') {
+                                        this.newphone = value;
+                                      } else {
+                                        this.newphone = value.substring(1);
+                                      }
+                                    }
+                                  },
+                                ),
+                              ),
+                            ]))
                       ],
                     ),
                   ),
@@ -250,12 +341,10 @@ class _UserEditProfileState extends State<UserEditProfile> {
                         SizedBox(
                           width: 20,
                         ),
-                        Container(
-                          width: MediaQuery.of(context).size.width * 0.65,
-                          // height: 20,
+                        Expanded(
                           child: TextField(
                             keyboardType: TextInputType.text,
-                            controller: username,
+                            controller: email,
                             decoration: InputDecoration(
                                 hintText: 'Xxxxxxxxxxxxxxx',
                                 hintStyle: TextStyle(color: Colors.grey),
@@ -289,9 +378,16 @@ class _UserEditProfileState extends State<UserEditProfile> {
                       child: Text('Save'),
                     ),
                   ),
+                  SizedBox(
+                    height: 20,
+                  )
                 ],
               ),
             )),
     );
+  }
+
+  update() {
+    // if(val['message']='success'){}
   }
 }

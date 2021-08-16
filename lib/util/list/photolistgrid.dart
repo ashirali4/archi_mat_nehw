@@ -128,13 +128,13 @@ class _ImageCardState extends State<ImageCard> {
                 ? Image.network(
                     Config.url + widget.data['images'][0]['image'],
                     width: MediaQuery.of(context).size.width,
-                    height: 134,
+                    height: 132,
                     fit: BoxFit.cover,
                   )
                 : Image.asset(
                     widget.data['image'],
                     width: MediaQuery.of(context).size.width,
-                    height: 134,
+                    height: 132,
                     fit: BoxFit.cover,
                   ),
           ),

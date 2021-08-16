@@ -174,7 +174,7 @@ class _LoginRegisterState extends State<LoginRegister> {
                     },
                     child: Align(
                         alignment: Alignment.topRight,
-                        child: Text(!login ? 'LOGIN HERE' : 'SINGUP')),
+                        child: Text(!login ? 'LOGIN HERE' : 'SIGNUP')),
                   )
                 ],
               ),

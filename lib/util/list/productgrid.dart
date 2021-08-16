@@ -49,7 +49,7 @@ class _ProductListGrideState extends State<ProductListGride> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Image.network(
-                      Config.url + widget.data[index]['image'],
+                      Config.url + widget.data[index]['images'][0]['image'],
                       width: MediaQuery.of(context).size.width,
                       height: 134,
                       fit: BoxFit.cover,

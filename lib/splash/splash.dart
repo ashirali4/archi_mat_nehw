@@ -189,7 +189,7 @@ class _SplachPageState extends State<SplachPage> {
   void initState() {
     super.initState();
 
-    var himr = Timer(Duration(seconds: 3), () => checker());
+    Timer(Duration(seconds: 3), () => checker());
     // firebaseCloudMessaging_Listeners();
   }
 

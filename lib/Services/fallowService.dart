@@ -2,14 +2,11 @@ import 'package:dio/dio.dart';
 
 import '../environment.dart';
 
-class ShopService {
+class FallowService {
   var dio = new Dio();
-  Future<dynamic> getshop(id) async {
+  Future<dynamic> fallow(data) async {
     try {
-      var resp = await this.dio.post(
-            Config.url + "shop/shopdetail",
-            data: id,
-          );
+      var resp = await this.dio.post(Config.url + "fallow/", data: data);
       return resp.data;
     } catch (e) {
       print(e);

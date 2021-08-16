@@ -1,7 +1,14 @@
+import 'dart:convert';
+
+import 'package:archi_mat/Services/fallowService.dart';
+import 'package:archi_mat/Services/inboxService.dart';
 import 'package:archi_mat/Services/shopService.dart';
+import 'package:archi_mat/pages/chat.dart';
 import 'package:archi_mat/util/slider/profileslider.dart';
 import 'package:archi_mat/util/widgets/businesslist.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../environment.dart';
 import '../theme.dart';
 
@@ -16,8 +23,9 @@ class ShopHomePage extends StatefulWidget {
 
 class _ShopHomePageState extends State<ShopHomePage> {
   double rating = 3.5, i = 0;
-  bool loader = true;
-  var shop, product;
+  int fallow = 0;
+  bool loader = true, youfallow = false;
+  var shop, product, userdata;
   List slider = [];
   @override
   void initState() {
@@ -25,12 +33,16 @@ class _ShopHomePageState extends State<ShopHomePage> {
     super.initState();
   }
 
-  getshop() {
+  getshop() async {
+    var pref = await SharedPreferences.getInstance();
     setState(() {
       loader = true;
+      userdata = jsonDecode(pref.getString('user'));
+      print(userdata);
     });
+    var data = {'user': userdata['id'], 'shop': widget.data['id']};
 
-    ShopService().getshop(widget.data['id']).then((value) {
+    ShopService().getshop(data).then((value) {
       print(value);
       setState(() {
         if (value != null) {
@@ -39,6 +51,14 @@ class _ShopHomePageState extends State<ShopHomePage> {
           shop = data['shop'];
           product = data['product'];
           slider = data['slider'];
+          fallow = data['fallow'];
+          if (!widget.shop) {
+            youfallow = data['youfallow'];
+          }
+          print('slider=================================');
+          print(slider);
+          print('slider=================================');
+
           loader = false;
         }
       });
@@ -58,8 +78,36 @@ class _ShopHomePageState extends State<ShopHomePage> {
                 )
               : Column(
                   children: [
-                    ProfileSliderPage(
-                      image: slider,
+                    Stack(
+                      children: [
+                        ProfileSliderPage(
+                          image: slider,
+                        ),
+                        Positioned(
+                          // bottom: 5,
+                          top: 5,
+                          right: 5,
+                          child: InkWell(
+                            onTap: () {
+                              message();
+                            },
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      color: AppTheme().white, width: 2),
+                                  color: AppTheme().l1black),
+                              child: Icon(
+                                Icons.message,
+                                size: 20,
+                                color: AppTheme().white,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                     Container(
                       padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
@@ -134,15 +182,31 @@ class _ShopHomePageState extends State<ShopHomePage> {
                           ),
                           widget.shop
                               ? Container()
-                              : Container(
-                                  // width: 150,
-                                  alignment: Alignment.center,
-                                  padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30),
-                                      border: Border.all(
-                                          color: AppTheme().l1black, width: 1)),
-                                  child: Text('Follow'),
+                              : GestureDetector(
+                                  child: Container(
+                                    // width: 150,
+                                    alignment: Alignment.center,
+                                    padding:
+                                        EdgeInsets.fromLTRB(15, 15, 15, 15),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30),
+                                        color: youfallow
+                                            ? AppTheme().red
+                                            : AppTheme().purple,
+                                        border: Border.all(
+                                            color: AppTheme().l1black,
+                                            width: 1)),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        fallow1();
+                                      },
+                                      child: Text(
+                                        youfallow ? 'Unfallow' : 'Follow',
+                                        style:
+                                            TextStyle(color: AppTheme().white),
+                                      ),
+                                    ),
+                                  ),
                                 ),
                         ],
                       ),
@@ -241,5 +305,36 @@ class _ShopHomePageState extends State<ShopHomePage> {
         ),
       ),
     );
+  }
+
+  fallow1() {
+    var data = {'user': userdata['id'], 'shop': shop['id']};
+    print(data);
+    FallowService().fallow(data).then((value) {
+      showAlert(value['message'], Colors.green);
+      getshop();
+    });
+  }
+
+  showAlert(text, backcolor) {
+    Fluttertoast.showToast(
+        msg: text,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.green,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+
+  message() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ChatPage(
+                  user: userdata,
+                  shop: shop,
+                  shopside: false,
+                )));
   }
 }
