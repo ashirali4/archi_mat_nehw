@@ -1,8 +1,7 @@
-import 'package:archi_mat/pages/viewVirtualMaterial.dart';
 import 'package:archi_mat/splash/splash.dart';
+import 'package:archi_mat/util/widgets/divider.dart';
 import 'package:flutter/material.dart';
 import 'package:archi_mat/theme.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 
 class VirtualMaterialScreen1 extends StatefulWidget {
@@ -16,52 +15,34 @@ class _VirtualMaterialScreen1State extends State<VirtualMaterialScreen1> {
     super.initState();
   }
 
+  double i = 0;
   double currentIndex = 0;
   List<String> items = [
-    'assets/images/back.png',
-    'assets/images/back.png',
+    'assets/images/Capture.PNG',
+    'assets/images/Capture.PNG',
 
-    'assets/images/back.png',
+    'assets/images/Capture.PNG',
 
     //  'assets/images/2.png',
     //  'assets/images/3.png'
   ];
 
   Widget slider() {
-    return Container(
-      height: 220.0,
-
-      // decoration: BoxDecoration(
-      //         color:AppTheme().white,
-      //       ),
-      child: CarouselSlider(
-        options: CarouselOptions(
-          height: 500.0,
-          autoPlay: true,
-          viewportFraction: 1,
-          onPageChanged: (index, reason) => {
-            this.setState(() {
-              currentIndex = index.toDouble();
-            }),
-          },
-        ),
-        items: items.map((i) {
-          return Builder(
-            builder: (BuildContext context) {
-              return Container(
-                  padding: EdgeInsets.all(15),
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 5.0),
-                  child: Image(
-                    width: 400,
-                    // height: 500,
-                    image: AssetImage(i),
-                    fit: BoxFit.fill,
-                  ));
-            },
-          );
-        }).toList(),
-      ),
+    return Column(
+      children: [
+        Container(
+            height: 220.0,
+            child: Container(
+                padding: EdgeInsets.all(15),
+                width: MediaQuery.of(context).size.width,
+                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                child: Image(
+                  width: 400,
+                  // height: 500,
+                  image: AssetImage(items[i.toInt()]),
+                  fit: BoxFit.fill,
+                ))),
+      ],
     );
   }
 
@@ -94,17 +75,25 @@ class _VirtualMaterialScreen1State extends State<VirtualMaterialScreen1> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 15),
                               child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    // IconButton(
-                                    //   icon: Icon(
-                                    //     Icons.arrow_back_ios,
-                                    //     color: AppTheme().grey,
-                                    //   ),
-                                    //   onPressed: () {
-                                    //     Navigator.pop(context);
-                                    //   },
-                                    // ),
+                                    i > 0
+                                        ? IconButton(
+                                            icon: Icon(
+                                              Icons.arrow_back_ios,
+                                              color: AppTheme().grey,
+                                            ),
+                                            onPressed: () {
+                                              setState(() {
+                                                i--;
+                                                currentIndex = i;
+                                              });
+                                            },
+                                          )
+                                        : Container(
+                                            height: 20,
+                                          ),
                                     InkWell(
                                       onTap: () {
                                         Navigator.of(context)
@@ -126,11 +115,15 @@ class _VirtualMaterialScreen1State extends State<VirtualMaterialScreen1> {
                                   ]),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(top: 60),
+                              padding: const EdgeInsets.only(top: 30),
                               child: Column(children: [
                                 Center(
                                   child: Text(
-                                    'View AR \nProduct',
+                                    i == 0
+                                        ? 'Discover \n More New Things'
+                                        : i == 1
+                                            ? 'Experience \n Virtually'
+                                            : 'Save Your \n Fave Materials',
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 32,
@@ -149,7 +142,7 @@ class _VirtualMaterialScreen1State extends State<VirtualMaterialScreen1> {
                                   ),
                                 ),
                                 Text(
-                                  'World of Architectural & \nBuilding Materials',
+                                  'World Of Architectural & \n Building Materials',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.black54, fontSize: 20),
@@ -172,7 +165,7 @@ class _VirtualMaterialScreen1State extends State<VirtualMaterialScreen1> {
                                         spacing:
                                             EdgeInsets.fromLTRB(5, 0, 5, 0),
                                         color: Colors.grey, // Inactive color
-                                        activeColor: Colors.white,
+                                        activeColor: AppTheme().lightgrey,
                                       ),
                                     ),
                                   ),
@@ -184,9 +177,17 @@ class _VirtualMaterialScreen1State extends State<VirtualMaterialScreen1> {
                         padding: const EdgeInsets.all(60.0),
                         child: InkWell(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>
-                                    VirtualMaterialScreen2()));
+                            if (i < 2) {
+                              setState(() {
+                                i++;
+                                currentIndex = i;
+                              });
+                            } else {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) => SplashScreen()),
+                                  (Route<dynamic> route) => false);
+                            }
                           },
                           child: Container(
                               // padding: EdgeInsets.only(left: 15),

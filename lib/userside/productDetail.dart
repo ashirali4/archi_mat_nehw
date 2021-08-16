@@ -50,8 +50,35 @@ class _ProductDetailState extends State<ProductDetail> {
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ProfileSliderPage(
-                      image: image,
+                    Stack(
+                      children: [
+                        ProfileSliderPage(
+                          image: image,
+                        ),
+                        Positioned(
+                          // bottom: 5,
+                          top: 5,
+                          left: 5,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                              decoration: BoxDecoration(
+                                  color: AppTheme().l1black,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      color: AppTheme().white, width: 1)),
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                size: 20,
+                                color: AppTheme().white,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
                     Divider_Widgets(),
                     Padding(

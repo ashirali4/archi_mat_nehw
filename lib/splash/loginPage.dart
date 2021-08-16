@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController pswd = new TextEditingController();
 
   String token;
-
+  bool loader = false;
   @override
   initState() {
     super.initState();
@@ -150,32 +150,39 @@ class _LoginPageState extends State<LoginPage> {
                             SizedBox(
                               height: 20,
                             ),
-                            GestureDetector(
-                              onTap: () {
-                                FocusScope.of(context)
-                                    .requestFocus(new FocusNode());
-                                if (email.text.isEmpty || pswd.text.isEmpty) {
-                                  showAlert(
-                                      "Please Fill Both Field", Colors.red);
-                                } else {
-                                  login();
-                                }
-                              },
-                              child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
-                                decoration: BoxDecoration(
-                                    color: AppTheme().purple,
-                                    borderRadius: BorderRadius.circular(30),
-                                    border: Border.all(
-                                        color: AppTheme().lblack, width: 1)),
-                                child: Text(
-                                  'Login',
-                                  style: TextStyle(color: AppTheme().white),
-                                ),
-                              ),
-                            ),
+                            loader
+                                ? Center(child: CircularProgressIndicator())
+                                : GestureDetector(
+                                    onTap: () {
+                                      FocusScope.of(context)
+                                          .requestFocus(new FocusNode());
+                                      if (email.text.isEmpty ||
+                                          pswd.text.isEmpty) {
+                                        showAlert("Please Fill Both Field",
+                                            Colors.red);
+                                      } else {
+                                        login();
+                                      }
+                                    },
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      alignment: Alignment.center,
+                                      padding:
+                                          EdgeInsets.fromLTRB(30, 20, 30, 20),
+                                      decoration: BoxDecoration(
+                                          color: AppTheme().purple,
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          border: Border.all(
+                                              color: AppTheme().lblack,
+                                              width: 1)),
+                                      child: Text(
+                                        'Login',
+                                        style:
+                                            TextStyle(color: AppTheme().white),
+                                      ),
+                                    ),
+                                  ),
                           ],
                         ),
                       ),
@@ -189,6 +196,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   login() async {
+    setState(() {
+      loader = true;
+    });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var data = {'email': email.text, 'password': pswd.text, 'mob_token': token};
     print(data);
@@ -218,9 +228,18 @@ class _LoginPageState extends State<LoginPage> {
               (Route<dynamic> route) => false);
           print('shop');
         } else {
+          setState(() {
+            loader = false;
+          });
           showAlert('User not available', Colors.red);
           print('user not available');
         }
+      } else {
+        setState(() {
+          loader = false;
+        });
+        showAlert('User not available', Colors.red);
+        print('user not available');
       }
     });
   }

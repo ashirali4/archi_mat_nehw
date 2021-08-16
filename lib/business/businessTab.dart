@@ -17,17 +17,17 @@ class BusinessTab extends StatefulWidget {
 class _BusinessTabState extends State<BusinessTab> {
   // PageController _controller = PageController(
   //   initialPage: 0,
-  // );
-  List professional1 = [
-    {'image': 'assets/images/professional1.png', 'name': 'Architects'},
-    {'image': 'assets/images/professional.png', 'name': 'Interior Designer'},
-    {'image': 'assets/images/professional3.png', 'name': 'Engineer'},
-    {'image': 'assets/images/professional2.png', 'name': 'Contractors'},
-    {'image': 'assets/images/professional1.png', 'name': 'Architects'},
-    {'image': 'assets/images/professional.png', 'name': 'Interior Designer'},
-    {'image': 'assets/images/professional3.png', 'name': 'Engineer'},
-    {'image': 'assets/images/professional2.png', 'name': 'Contractors'},
-  ];
+  // // );
+  // List professional1 = [
+  //   {'image': 'assets/images/professional1.png', 'name': 'Architects'},
+  //   {'image': 'assets/images/professional.png', 'name': 'Interior Designer'},
+  //   {'image': 'assets/images/professional3.png', 'name': 'Engineer'},
+  //   {'image': 'assets/images/professional2.png', 'name': 'Contractors'},
+  //   {'image': 'assets/images/professional1.png', 'name': 'Architects'},
+  //   {'image': 'assets/images/professional.png', 'name': 'Interior Designer'},
+  //   {'image': 'assets/images/professional3.png', 'name': 'Engineer'},
+  //   {'image': 'assets/images/professional2.png', 'name': 'Contractors'},
+  // ];
   int _page = 0;
   bool check = true;
 

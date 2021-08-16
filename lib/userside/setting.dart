@@ -29,6 +29,7 @@ class _UserSettingState extends State<UserSetting> {
               ),
               ProfilepicWidgets(
                 image: widget.data['image'],
+                update: false,
               ),
               SizedBox(
                 height: 40,

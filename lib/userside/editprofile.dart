@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:archi_mat/Services/loginService.dart';
 import 'package:archi_mat/theme.dart';
 import 'package:archi_mat/util/widgets/back.dart';
 import 'package:archi_mat/util/widgets/divider.dart';
 import 'package:archi_mat/util/widgets/profilepic.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gender_picker/source/enums.dart';
 import 'package:gender_picker/source/gender_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,16 +22,17 @@ class _UserEditProfileState extends State<UserEditProfile> {
   TextEditingController username = new TextEditingController();
   TextEditingController lname = new TextEditingController();
   TextEditingController fname = new TextEditingController();
+
   TextEditingController phone = new TextEditingController();
   TextEditingController email = new TextEditingController();
-  String image = '';
+  String image = '', image1 = '';
   var countrycode = '+92';
   var detail;
   var newphone, gender;
   Gender _gender;
   DateTime selectedDate = DateTime.now();
   // var gender;
-  bool loader = true;
+  bool loader = true, save = false;
   @override
   void initState() {
     userdetail();
@@ -44,6 +47,7 @@ class _UserEditProfileState extends State<UserEditProfile> {
         setState(() {
           image = detail['image'];
           fname.text = detail['firstname'];
+          username.text = detail['username'];
           lname.text = detail['lastname'];
           email.text = detail['email'];
           phone.text = detail['phoneNo'];
@@ -95,6 +99,7 @@ class _UserEditProfileState extends State<UserEditProfile> {
                   ),
                   ProfilepicWidgets(
                     image: image,
+                    update: true,
                   ),
                   SizedBox(
                     height: 40,
@@ -358,26 +363,42 @@ class _UserEditProfileState extends State<UserEditProfile> {
                   SizedBox(
                     height: 40,
                   ),
-                  InkWell(
-                    onTap: () async {
-                      // SharedPreferences pref = await SharedPreferences.getInstance();
-                      // pref.clear();
-                      // pref.setString('new', 'new');
-                      // Navigator.of(context).pushAndRemoveUntil(
-                      //     MaterialPageRoute(builder: (context) => SplashScreen()),
-                      //     (Route<dynamic> route) => false);
-                    },
-                    child: Container(
-                      width: 150,
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          border:
-                              Border.all(color: AppTheme().l1black, width: 1)),
-                      child: Text('Save'),
-                    ),
-                  ),
+                  save
+                      ? Center(child: CircularProgressIndicator())
+                      : InkWell(
+                          onTap: () async {
+                            FocusScope.of(context)
+                                .requestFocus(new FocusNode());
+                            print(selectedDate.toString());
+
+                            print(newphone);
+                            print(email.text);
+
+                            print(lname.text);
+                            print(fname.text);
+                            if (email.text.isEmpty ||
+                                lname.text.trim().isEmpty ||
+                                fname.text.trim().isEmpty ||
+                                username.text.trim().isEmpty ||
+                                newphone == null) {
+                              print('Please Fill All Field');
+                              showAlert("Please Fill All Field", Colors.red);
+                            } else {
+                              print('signup');
+                              update();
+                            }
+                          },
+                          child: Container(
+                            width: 150,
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.fromLTRB(30, 15, 30, 15),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(
+                                    color: AppTheme().l1black, width: 1)),
+                            child: Text('Save'),
+                          ),
+                        ),
                   SizedBox(
                     height: 20,
                   )
@@ -387,7 +408,56 @@ class _UserEditProfileState extends State<UserEditProfile> {
     );
   }
 
-  update() {
-    // if(val['message']='success'){}
+  update() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      save = true;
+      if (prefs.getString('image') == null || prefs.getString('image') == '') {
+        image1 = image;
+      } else {
+        image1 = prefs.getString('image');
+      }
+    });
+    var data = {
+      'email': email.text,
+      'username': username.text,
+      'firstname': fname.text.trim(),
+      'lastname': lname.text.trim(),
+      'gender': gender != null ? gender : 'Male',
+      'birthday': selectedDate.toString(),
+      'phone': countrycode + newphone,
+      'image': image1
+    };
+    print(data);
+    LoginService().signup(data).then((value) {
+      print(value);
+      if (value['message'] == 'success') {
+        if (value['user']['role']['name'] == 'user') {
+          print('user');
+          prefs.setString('user', jsonEncode(value['user']));
+        } else {
+          showAlert('User not available', Colors.red);
+          print('User not available');
+        }
+      } else {
+        setState(() {
+          save = false;
+        });
+        showAlert(value['message'], Colors.red);
+      }
+    });
+  }
+
+  showAlert(text, backcolor) {
+    print('infunction');
+    Fluttertoast.showToast(
+        msg: text,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: backcolor,
+        textColor: Colors.white,
+        fontSize: 16.0);
   }
 }

@@ -46,7 +46,7 @@ class _LoginRegisterState extends State<LoginRegister> {
               image: AssetImage('assets/images/back.png'),
               fit: BoxFit.cover,
               width: MediaQuery.of(context).size.width,
-              // height: MediaQuery.of(context).size.height * 0.9,
+              height: MediaQuery.of(context).size.height * 0.43,
             ),
             Container(
               width: MediaQuery.of(context).size.width,

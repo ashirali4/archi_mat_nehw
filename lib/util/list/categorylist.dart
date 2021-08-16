@@ -18,19 +18,19 @@ class CategoryList extends StatefulWidget {
 class _CategoryListState extends State<CategoryList> {
   int i = 0;
   List category = ['All', "Tiles", "Comment", 'Furniture'];
-  List material = [
-    // {'image': 'assets/images/search.svg', 'name': 'Search'},
-    {'image': 'assets/images/1.svg', 'name': 'BRICK'},
-    {'image': 'assets/images/2.svg', 'name': 'WALL'},
-    {'image': 'assets/images/3.svg', 'name': 'CEILING'},
-    {'image': 'assets/images/4.svg', 'name': 'CEMENT'},
-    {'image': 'assets/images/5.svg', 'name': 'DEMOLITION'},
-    {'image': 'assets/images/1.svg', 'name': 'BRICK'},
-    {'image': 'assets/images/2.svg', 'name': 'WALL'},
-    {'image': 'assets/images/3.svg', 'name': 'CEILING'},
-    {'image': 'assets/images/4.svg', 'name': 'CEMENT'},
-    {'image': 'assets/images/5.svg', 'name': 'DEMOLITION'},
-  ];
+  // List material = [
+  //   // {'image': 'assets/images/search.svg', 'name': 'Search'},
+  //   {'image': 'assets/images/1.svg', 'name': 'BRICK'},
+  //   {'image': 'assets/images/2.svg', 'name': 'WALL'},
+  //   {'image': 'assets/images/3.svg', 'name': 'CEILING'},
+  //   {'image': 'assets/images/4.svg', 'name': 'CEMENT'},
+  //   {'image': 'assets/images/5.svg', 'name': 'DEMOLITION'},
+  //   {'image': 'assets/images/1.svg', 'name': 'BRICK'},
+  //   {'image': 'assets/images/2.svg', 'name': 'WALL'},
+  //   {'image': 'assets/images/3.svg', 'name': 'CEILING'},
+  //   {'image': 'assets/images/4.svg', 'name': 'CEMENT'},
+  //   {'image': 'assets/images/5.svg', 'name': 'DEMOLITION'},
+  // ];
   @override
   Widget build(BuildContext context) {
     return Column(

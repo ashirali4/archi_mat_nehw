@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:archi_mat/Services/fallowService.dart';
-import 'package:archi_mat/Services/inboxService.dart';
 import 'package:archi_mat/Services/shopService.dart';
 import 'package:archi_mat/pages/chat.dart';
 import 'package:archi_mat/util/slider/profileslider.dart';
@@ -83,30 +82,61 @@ class _ShopHomePageState extends State<ShopHomePage> {
                         ProfileSliderPage(
                           image: slider,
                         ),
-                        Positioned(
-                          // bottom: 5,
-                          top: 5,
-                          right: 5,
-                          child: InkWell(
-                            onTap: () {
-                              message();
-                            },
-                            child: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      color: AppTheme().white, width: 2),
-                                  color: AppTheme().l1black),
-                              child: Icon(
-                                Icons.message,
-                                size: 20,
-                                color: AppTheme().white,
+                        widget.shop
+                            ? Container()
+                            : Positioned(
+                                // bottom: 5,
+                                top: 5,
+                                right: 5,
+                                child: InkWell(
+                                  onTap: () {
+                                    message();
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+                                    decoration: BoxDecoration(
+                                        color: AppTheme().l1black,
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: AppTheme().white, width: 1)),
+                                    child: Icon(
+                                      Icons.message,
+                                      size: 20,
+                                      color: AppTheme().white,
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                        )
+                        widget.shop
+                            ? Container()
+                            : Positioned(
+                                // bottom: 5,
+                                top: 5,
+                                left: 5,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.fromLTRB(10, 5, 5, 5),
+                                    decoration: BoxDecoration(
+                                        color: AppTheme().l1black,
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: AppTheme().white, width: 1)),
+                                    // decoration: BoxDecoration(
+                                    // shape: BoxShape.circle,
+                                    // border: Border.all(
+                                    //     color: AppTheme().white, width: 1),
+                                    // color: AppTheme().l1black),
+                                    child: Icon(
+                                      Icons.arrow_back_ios,
+                                      size: 20,
+                                      color: AppTheme().white,
+                                    ),
+                                  ),
+                                ),
+                              )
                       ],
                     ),
                     Container(

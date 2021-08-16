@@ -24,6 +24,7 @@ class _RegisterationPageState extends State<RegisterationPage> {
   TextEditingController pswd = new TextEditingController();
   TextEditingController confirmpswd = new TextEditingController();
   TextEditingController fname = new TextEditingController();
+  TextEditingController uname = new TextEditingController();
   TextEditingController lname = new TextEditingController();
   TextEditingController number = new TextEditingController();
 
@@ -31,6 +32,7 @@ class _RegisterationPageState extends State<RegisterationPage> {
   bool passwordmatch = false, birth = true;
   var countrycode = '+92';
   var newphone, gender;
+  bool loader = false;
 
   @override
   initState() {
@@ -106,8 +108,27 @@ class _RegisterationPageState extends State<RegisterationPage> {
                   Center(
                       child: ProfilepicWidgets(
                     image: '',
+                    update: true,
                   )),
                   SizedBox(height: 20),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(color: AppTheme().black)),
+                    child: TextField(
+                      keyboardType: TextInputType.text,
+                      controller: uname,
+                      decoration: InputDecoration(
+                        hintText: 'User Name',
+                        hintStyle: TextStyle(color: AppTheme().black),
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Container(
                     padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
                     decoration: BoxDecoration(
@@ -314,48 +335,54 @@ class _RegisterationPageState extends State<RegisterationPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      FocusScope.of(context).requestFocus(new FocusNode());
-                      print(selectedDate.toString());
-                      print(birth);
-                      print(newphone);
-                      print(email.text);
-                      print(pswd.text);
-                      print(lname.text);
-                      print(fname.text);
-                      if (email.text.isEmpty ||
-                          pswd.text.isEmpty ||
-                          lname.text.trim().isEmpty ||
-                          fname.text.trim().isEmpty ||
-                          birth ||
-                          newphone == null) {
-                        print('Please Fill All Field');
-                        showAlert("Please Fill All Field", Colors.red);
-                      } else if (!passwordmatch) {
-                        print('Pasword and Confirm Pasword does`t match!');
-                        showAlert("Pasword and Confirm Pasword does`t match!",
-                            Colors.red);
-                      } else {
-                        print('signup');
-                        signup();
-                      }
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
-                      decoration: BoxDecoration(
-                          color: AppTheme().purple,
-                          borderRadius: BorderRadius.circular(30),
-                          border:
-                              Border.all(color: AppTheme().lblack, width: 1)),
-                      child: Text(
-                        'Create',
-                        style: TextStyle(color: AppTheme().white),
-                      ),
-                    ),
-                  ),
+                  loader
+                      ? Center(child: CircularProgressIndicator())
+                      : GestureDetector(
+                          onTap: () {
+                            FocusScope.of(context)
+                                .requestFocus(new FocusNode());
+                            print(selectedDate.toString());
+                            print(birth);
+                            print(newphone);
+                            print(email.text);
+                            print(pswd.text);
+                            print(lname.text);
+                            print(fname.text);
+                            if (email.text.isEmpty ||
+                                pswd.text.isEmpty ||
+                                lname.text.trim().isEmpty ||
+                                fname.text.trim().isEmpty ||
+                                uname.text.trim().isEmpty ||
+                                birth ||
+                                newphone == null) {
+                              print('Please Fill All Field');
+                              showAlert("Please Fill All Field", Colors.red);
+                            } else if (!passwordmatch) {
+                              print(
+                                  'Pasword and Confirm Pasword does`t match!');
+                              showAlert(
+                                  "Pasword and Confirm Pasword does`t match!",
+                                  Colors.red);
+                            } else {
+                              print('signup');
+                              signup();
+                            }
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.fromLTRB(30, 20, 30, 20),
+                            decoration: BoxDecoration(
+                                color: AppTheme().purple,
+                                borderRadius: BorderRadius.circular(30),
+                                border: Border.all(
+                                    color: AppTheme().lblack, width: 1)),
+                            child: Text(
+                              'Create',
+                              style: TextStyle(color: AppTheme().white),
+                            ),
+                          ),
+                        ),
                 ],
               ),
             ),
@@ -368,9 +395,13 @@ class _RegisterationPageState extends State<RegisterationPage> {
   }
 
   signup() async {
+    setState(() {
+      loader = true;
+    });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var data = {
       'email': email.text,
+      'username': uname.text,
       'password': pswd.text,
       'mob_token': token,
       'firstname': fname.text.trim(),
@@ -386,6 +417,7 @@ class _RegisterationPageState extends State<RegisterationPage> {
       if (value['message'] == 'success') {
         if (value['user']['role']['name'] == 'user') {
           print('user');
+          prefs.remove('image');
           prefs.setString('user', jsonEncode(value['user']));
 
           Navigator.of(context).pushAndRemoveUntil(
@@ -396,13 +428,17 @@ class _RegisterationPageState extends State<RegisterationPage> {
                       )),
               (Route<dynamic> route) => false);
         } else {
+          setState(() {
+            loader = false;
+          });
           showAlert('User not available', Colors.red);
           print('User not available');
         }
-      } else if (value['message'] == 'user already exist') {
-        showAlert('User already exist', Colors.red);
       } else {
-        showAlert('Something went wrong!', Colors.red);
+        setState(() {
+          loader = false;
+        });
+        showAlert(value['message'], Colors.red);
       }
     });
   }

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:archi_mat/Services/inboxService.dart';
-import 'package:archi_mat/util/widgets/divider.dart';
+import 'package:archi_mat/pages/chat.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
@@ -144,6 +144,26 @@ class _InboxState extends State<Inbox> {
     });
   }
 
+  aftersearch() {
+    FocusScope.of(context).unfocus();
+    setState(() {
+      cancel = !cancel;
+      loader1 = true;
+      print('inbox======================');
+      print(inbox);
+      inbox1 = inbox;
+      print('inbox1======================');
+
+      print(inbox1);
+      if (inbox1.length == 0) {
+        loader = 0;
+      } else {
+        loader = inbox1.length;
+      }
+      loader1 = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,7 +179,7 @@ class _InboxState extends State<Inbox> {
           },
         ),
         title: Text(
-          'Business',
+          'Inbox',
           style: TextStyle(
             color: AppTheme().black,
           ),
@@ -189,24 +209,26 @@ class _InboxState extends State<Inbox> {
                   // color: AppTheme.dark_grey,
                 ),
                 decoration: new InputDecoration(
-                  fillColor: AppTheme().blue,
+                  // fillColor: AppTheme().blue,
                   focusColor: AppTheme().blue,
                   errorText: null,
-                  border: InputBorder.none,
+                  // border: InputBorder.none,
                   suffixIcon: cancel
                       ? InkWell(
                           child: Icon(Icons.cancel),
                           onTap: () {
-                            if (loader > 0) {
-                              setState(() {
-                                search.clear();
-                              });
-                              if (widget.shopside) {
-                                searchvalueASshop();
-                              } else {
-                                searchvalueASuser();
-                              }
-                            }
+                            setState(() {
+                              search.clear();
+                            });
+                            print(search.text);
+                            aftersearch();
+                            // // if (loader > 0) {
+                            // if (widget.shopside) {
+                            //   searchvalueASshop();
+                            // } else {
+                            //   searchvalueASuser();
+                            // }
+                            // }
                           },
                         )
                       : InkWell(
@@ -225,13 +247,21 @@ class _InboxState extends State<Inbox> {
                         ),
                   hintText: "Search Messages",
                   hintStyle: TextStyle(color: AppTheme().l1black),
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        const BorderSide(color: Colors.black, width: 2.0),
+                    borderRadius: BorderRadius.circular(100.0),
+                  ),
                 ),
               ),
             ),
             SizedBox(
               height: 20,
             ),
-            Divider_Widgets(),
+            // Divider_Widgets(),
             loader != 0
                 ? Padding(
                     padding: const EdgeInsets.only(bottom: 300),
@@ -244,7 +274,16 @@ class _InboxState extends State<Inbox> {
                             return Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ChatPage(
+                                                user: inbox1[i]['user'],
+                                                shop: inbox1[i]['shop'],
+                                                shopside: false,
+                                              )));
+                                },
                                 child: ListTile(
                                   leading: CircleAvatar(
                                     child: CircleAvatar(
@@ -325,9 +364,12 @@ class _InboxState extends State<Inbox> {
                           ? Center(
                               child: CircularProgressIndicator(),
                             )
-                          : Text(
-                              'No Message available',
-                              style: TextStyle(color: Colors.grey),
+                          : Padding(
+                              padding: const EdgeInsets.only(top: 10),
+                              child: Text(
+                                'No Message available',
+                                style: TextStyle(color: Colors.black),
+                              ),
                             ),
                     ],
                   ),

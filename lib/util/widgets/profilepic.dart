@@ -12,7 +12,8 @@ import '../../environment.dart';
 
 class ProfilepicWidgets extends StatefulWidget {
   final dynamic image;
-  const ProfilepicWidgets({Key key, this.image}) : super(key: key);
+  final bool update;
+  const ProfilepicWidgets({Key key, this.image, this.update}) : super(key: key);
 
   @override
   _ProfilepicWidgetsState createState() => _ProfilepicWidgetsState();
@@ -92,7 +93,9 @@ class _ProfilepicWidgetsState extends State<ProfilepicWidgets> {
                 ),
               ),
               onTap: () {
-                _showDialogue(context);
+                if (widget.update) {
+                  _showDialogue(context);
+                }
               },
             ),
           ),

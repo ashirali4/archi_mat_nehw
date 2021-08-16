@@ -4,15 +4,11 @@ import 'package:archi_mat/Services/service.dart';
 import 'package:archi_mat/pages/drawer.dart';
 import 'package:archi_mat/theme.dart';
 import 'package:archi_mat/util/list/categorylist.dart';
-import 'package:archi_mat/util/list/instagram.dart';
-import 'package:archi_mat/util/list/photolistgrid.dart';
 import 'package:archi_mat/util/list/productlist.dart';
 import 'package:archi_mat/util/slider/slider.dart';
 import 'package:archi_mat/util/slider/slider1.dart';
 
 import 'package:archi_mat/util/widgets/list.dart';
-import 'package:archi_mat/util/widgets/list2.dart';
-import 'package:archi_mat/util/widgets/title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -28,33 +24,33 @@ class _HomePageState extends State<HomePage> {
   List category = [], product1 = [], service = [], slider = [];
 
   bool loader = true;
-  List professional = [
-    {'image': 'assets/images/card2.png', 'name': 'Architects'},
-    {'image': 'assets/images/card10.png', 'name': 'Interior Designer'},
-    {'image': 'assets/images/card9.png', 'name': 'Engineer'},
-    {'image': 'assets/images/card8.png', 'name': 'Contractors'},
-  ];
-  List professional1 = [
-    {'image': 'assets/images/professional1.png', 'name': 'Architects'},
-    {'image': 'assets/images/professional.png', 'name': 'Interior Designer'},
-    {'image': 'assets/images/professional3.png', 'name': 'Engineer'},
-    {'image': 'assets/images/professional2.png', 'name': 'Contractors'},
-    {'image': 'assets/images/professional1.png', 'name': 'Architects'},
-    {'image': 'assets/images/professional.png', 'name': 'Interior Designer'},
-    {'image': 'assets/images/professional3.png', 'name': 'Engineer'},
-    {'image': 'assets/images/professional2.png', 'name': 'Contractors'},
-  ];
-  List photos = [
-    'assets/images/card1.png',
-    'assets/images/card3.png',
-    'assets/images/card4.png',
-    'assets/images/card6.png',
-    'assets/images/card7.png',
-    'assets/images/2.png',
-    'assets/images/Image1.png',
-    'assets/images/card4.png',
-    'assets/images/card6.png'
-  ];
+  // List professional = [
+  //   {'image': 'assets/images/card2.png', 'name': 'Architects'},
+  //   {'image': 'assets/images/card10.png', 'name': 'Interior Designer'},
+  //   {'image': 'assets/images/card9.png', 'name': 'Engineer'},
+  //   {'image': 'assets/images/card8.png', 'name': 'Contractors'},
+  // ];
+  // List professional1 = [
+  //   {'image': 'assets/images/professional1.png', 'name': 'Architects'},
+  //   {'image': 'assets/images/professional.png', 'name': 'Interior Designer'},
+  //   {'image': 'assets/images/professional3.png', 'name': 'Engineer'},
+  //   {'image': 'assets/images/professional2.png', 'name': 'Contractors'},
+  //   {'image': 'assets/images/professional1.png', 'name': 'Architects'},
+  //   {'image': 'assets/images/professional.png', 'name': 'Interior Designer'},
+  //   {'image': 'assets/images/professional3.png', 'name': 'Engineer'},
+  //   {'image': 'assets/images/professional2.png', 'name': 'Contractors'},
+  // // ];
+  // List photos = [
+  //   'assets/images/card1.png',
+  //   'assets/images/card3.png',
+  //   'assets/images/card4.png',
+  //   'assets/images/card6.png',
+  //   'assets/images/card7.png',
+  //   'assets/images/2.png',
+  //   'assets/images/Image1.png',
+  //   'assets/images/card4.png',
+  //   'assets/images/card6.png'
+  // ];
 
   getcategory() {
     setState(() {
@@ -260,26 +256,26 @@ class _HomePageState extends State<HomePage> {
                     Slider1Page(
                       data: slider,
                     ),
-                    Productlist(
-                      i: 0,
-                      data: product,
-                      title: 'Find Interactive Events',
-                    ),
-                    Title_Widgets(
-                      bold: false,
-                      text: 'Latest Feed',
-                    ),
-                    List2(),
-                    PhotoListGride(
-                      i: 0,
-                      count: 2,
-                      data: product,
-                      title: 'Find Interactive Events',
-                    ),
-                    InstList(
-                      data: product,
-                      title: 'Instagram #archimat.xr',
-                    ),
+                    // Productlist(
+                    //   i: 0,
+                    //   data: product,
+                    //   title: 'Find Interactive Events',
+                    // ),
+                    // Title_Widgets(
+                    //   bold: false,
+                    //   text: 'Latest Feed',
+                    // ),
+                    // List2(),
+                    // PhotoListGride(
+                    //   i: 0,
+                    //   count: 2,
+                    //   data: product,
+                    //   title: 'Find Interactive Events',
+                    // ),
+                    // InstList(
+                    //   data: product,
+                    //   title: 'Instagram #archimat.xr',
+                    // ),
                     SizedBox(
                       height: 20,
                     )
