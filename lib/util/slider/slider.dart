@@ -130,7 +130,7 @@ class _SliderPageState extends State<SliderPage> {
                                             'How can we help you?',
                                             style: TextStyle(
                                                 color: AppTheme().white,
-                                                fontSize: 20),
+                                                fontSize: 30),
                                           ),
                                         ],
                                       ),

@@ -122,9 +122,12 @@ class _HomePageState extends State<HomePage> {
         if (value != null) {
           var data = value;
           // print(data['arks']);
-          slider = data['slider1'];
-          slider2 = data['slider2'];
-          slider3 = data['slider3'];
+          slider = data['arks'];
+          slider2 = data['arks'];
+          slider3 = data['arks'];
+          // slider = data['slider1'];
+          // slider2 = data['slider2'];
+          // slider3 = data['slider3'];
           loader = false;
         }
       });
@@ -185,16 +188,16 @@ class _HomePageState extends State<HomePage> {
           leading: GestureDetector(
             onTap: () => scaffoldKey.currentState.openDrawer(),
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
               child: Container(
-                padding: EdgeInsets.all(5),
+                padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(color: AppTheme().black)),
                 child: SvgPicture.asset(
                   'assets/images/menu.svg',
                   color: AppTheme().l1black,
-                  width: 20,
+                  width: 40,
                 ),
               ),
             ),
@@ -227,9 +230,12 @@ class _HomePageState extends State<HomePage> {
                       data: slider,
                     ),
                     List1(),
-                    CategoryList(
-                      category: category,
-                      subcategory: false,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: CategoryList(
+                        category: category,
+                        subcategory: false,
+                      ),
                     ),
                     Productlist(
                       // onclick: () {

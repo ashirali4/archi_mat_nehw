@@ -107,33 +107,33 @@ class _List1State extends State<List1> {
                   ),
                 ),
               ),
-              // GestureDetector(
-              //   onTap: () {
-              //     setState(() {
-              //       i = 3;
-              //     });
-              //   },
-              //   child: Container(
-              //     padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-              //     alignment: Alignment.center,
-              //     width: i == 3 ? 90 : 50,
-              //     decoration: i != 3
-              //         ? BoxDecoration(
-              //             color: AppTheme().white,
-              //           )
-              //         : BoxDecoration(
-              //             color: AppTheme().white,
-              //             borderRadius: BorderRadius.circular(25),
-              //             border:
-              //                 Border.all(color: AppTheme().lblack, width: 1)),
-              //     child: Text(
-              //       'Events',
-              //       style: TextStyle(
-              //         fontSize: 12,
-              //       ),
-              //     ),
-              //   ),
-              // ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    i = 3;
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  alignment: Alignment.center,
+                  width: i == 3 ? 90 : 50,
+                  decoration: i != 3
+                      ? BoxDecoration(
+                          color: AppTheme().white,
+                        )
+                      : BoxDecoration(
+                          color: AppTheme().white,
+                          borderRadius: BorderRadius.circular(25),
+                          border:
+                              Border.all(color: AppTheme().lblack, width: 1)),
+                  child: Text(
+                    'Events',
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
