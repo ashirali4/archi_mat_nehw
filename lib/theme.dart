@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // all colors here
@@ -27,7 +28,7 @@ class AppTheme {
 
   // Primary Text Style
   TextStyle primaryTextStyle(bool i) {
-    return TextStyle(
+    return GoogleFonts.poppins(
       fontSize: 10,
       color: !i ? black : white,
     );

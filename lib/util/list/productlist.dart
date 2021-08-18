@@ -2,6 +2,7 @@ import 'package:archi_mat/environment.dart';
 import 'package:archi_mat/userside/productDetail.dart';
 import 'package:archi_mat/util/widgets/title.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../theme.dart';
 
 class Productlist extends StatefulWidget {
@@ -27,7 +28,7 @@ class _ProductlistState extends State<Productlist> {
             bold: false,
           ),
           Container(
-            height: 231,
+            height: 241,
             alignment: Alignment.topLeft,
             // padding: EdgeInsets.only(left: 10),
             color: AppTheme().white,
@@ -55,10 +56,10 @@ class _ProductlistState extends State<Productlist> {
                   },
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.5,
-                    height: 220,
+                    height: 230,
                     alignment: Alignment.topLeft,
                     decoration: BoxDecoration(
-                        border: Border.all(color: AppTheme().grey),
+                        border: Border.all(color: AppTheme().grey,width: .5),
                         color: AppTheme().white),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,7 +118,7 @@ class _ProductlistState extends State<Productlist> {
                                               color: AppTheme().l2black)),
                                       child: Text(
                                         widget.i == 1 ? 'VR' : 'AR',
-                                        style: TextStyle(
+                                        style: GoogleFonts.poppins(
                                             fontSize: 8,
                                             color: AppTheme().l2black),
                                       ))
@@ -135,7 +136,7 @@ class _ProductlistState extends State<Productlist> {
                             children: [
                               Text(
                                 widget.data[index]['name'],
-                                style: TextStyle(fontSize: 15),
+                                style: GoogleFonts.poppins(fontSize: 15),
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -146,7 +147,8 @@ class _ProductlistState extends State<Productlist> {
                                         : widget.i == 4
                                             ? ''
                                             : widget.data[index]['category'],
-                                    style: TextStyle(color: AppTheme().l1black),
+                                    style: GoogleFonts.poppins(color: AppTheme().l1black,
+                                    fontSize: 12),
                                   ),
                                   // Container(
                                   //   width: 70,

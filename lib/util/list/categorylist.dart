@@ -1,5 +1,6 @@
 import 'package:archi_mat/environment.dart';
 import 'package:archi_mat/userside/category.dart';
+import 'package:archi_mat/util/widgets/divider.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 
@@ -36,6 +37,7 @@ class _CategoryListState extends State<CategoryList> {
     return Column(
       children: [
         Container(
+          padding: EdgeInsets.only(left: 20),
           height: 116,
           child:
               // loader
@@ -50,7 +52,6 @@ class _CategoryListState extends State<CategoryList> {
                   child: Container(
                     width: 60,
                     // height: 70,
-                    color: AppTheme().white,
                     child: InkWell(
                       onTap: () {
                         Navigator.push(
@@ -105,6 +106,8 @@ class _CategoryListState extends State<CategoryList> {
             },
           ),
         ),
+        Divider_Widgets(),
+
       ],
     );
   }

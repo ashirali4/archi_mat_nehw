@@ -76,7 +76,7 @@ class _Slider1PageState extends State<Slider1Page> {
                         image: widget.data != null
                             ? NetworkImage(Config.url + item['image'])
                             : AssetImage(item),
-                        fit: BoxFit.fill),
+                        fit: BoxFit.fitWidth),
                   ),
                   width: MediaQuery.of(context).size.width,
                   // height: 200,

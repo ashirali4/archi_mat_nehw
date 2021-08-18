@@ -22,19 +22,29 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3c158ed9-5008-4465-ae33-c0e9df07b3bd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+    <list default="true" id="3c158ed9-5008-4465-ae33-c0e9df07b3bd" name="Default Changelist" comment="yhh">
+      <change afterPath="$PROJECT_DIR$/assets/images/makitsvg.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/archi_mat_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/archi_mat_android.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/Debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/Debug.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/Release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/Release.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/pages/tab.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/pages/tab.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/theme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/theme.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/userside/category.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/userside/category.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/userside/homepage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/userside/homepage.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/util/list/categorylist.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/util/list/categorylist.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/util/list/productlist.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/util/list/productlist.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/util/slider/slider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/util/slider/slider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/util/slider/slider1.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/util/slider/slider1.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/util/widgets/list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/util/widgets/list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/util/widgets/title.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/util/widgets/title.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Pull.Settings">
+    <option name="BRANCH" value="main" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -48,8 +58,14 @@
   <component name="PropertiesComponent">
     <property name="dart.analysis.tool.window.force.activate" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets/images" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/images" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -60,6 +76,14 @@
       <option name="presentableId" value="Default" />
       <updated>1629293871739</updated>
     </task>
+    <task id="LOCAL-00001" summary="yhh">
+      <created>1629306246335</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1629306246336</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -72,5 +96,31 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="yhh" />
+    <option name="LAST_COMMIT_MESSAGE" value="yhh" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1398" height="208" key="GridCell.Tab.0.bottom" timestamp="1629310137276">
+      <screen x="0" y="25" width="1440" height="815" />
+    </state>
+    <state width="1398" height="208" key="GridCell.Tab.0.bottom/0.25.1440.815@0.25.1440.815" timestamp="1629310137276" />
+    <state width="1398" height="208" key="GridCell.Tab.0.center" timestamp="1629310137271">
+      <screen x="0" y="25" width="1440" height="815" />
+    </state>
+    <state width="1398" height="208" key="GridCell.Tab.0.center/0.25.1440.815@0.25.1440.815" timestamp="1629310137271" />
+    <state width="1398" height="208" key="GridCell.Tab.0.left" timestamp="1629310137268">
+      <screen x="0" y="25" width="1440" height="815" />
+    </state>
+    <state width="1398" height="208" key="GridCell.Tab.0.left/0.25.1440.815@0.25.1440.815" timestamp="1629310137268" />
+    <state width="1398" height="208" key="GridCell.Tab.0.right" timestamp="1629310137273">
+      <screen x="0" y="25" width="1440" height="815" />
+    </state>
+    <state width="1398" height="208" key="GridCell.Tab.0.right/0.25.1440.815@0.25.1440.815" timestamp="1629310137273" />
+    <state x="358" y="198" key="MultipleFileMergeDialog" timestamp="1629306408472">
+      <screen x="0" y="25" width="1440" height="815" />
+    </state>
+    <state x="358" y="198" key="MultipleFileMergeDialog/0.25.1440.815@0.25.1440.815" timestamp="1629306408472" />
   </component>
 </project>

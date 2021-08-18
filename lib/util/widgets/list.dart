@@ -1,5 +1,6 @@
 import 'package:archi_mat/util/widgets/divider.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../theme.dart';
 
@@ -31,21 +32,19 @@ class _List1State extends State<List1> {
                   });
                 },
                 child: Container(
-                  padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                  padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
                   alignment: Alignment.center,
                   width: i == 0 ? 90 : 50,
                   decoration: i != 0
                       ? BoxDecoration(
-                          color: AppTheme().white,
                         )
                       : BoxDecoration(
-                          color: AppTheme().white,
                           borderRadius: BorderRadius.circular(25),
                           border:
                               Border.all(color: AppTheme().lblack, width: 1)),
                   child: Text(
                     'Shops',
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 12,
                     ),
                   ),

@@ -94,20 +94,20 @@ class _TabPageState extends State<TabPage> {
     return Scaffold(
       backgroundColor: Color.fromRGBO(237, 240, 242, 1.0),
       body: getPage(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.purple,
-        child: SvgPicture.asset(
-          'assets/images/floatlogo.svg',
-          width: 20,
-          color: AppTheme().white,
-        ),
-        onPressed: () {
-          this.setState(() {
-            _page = 4;
-          });
-        },
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Colors.purple,
+      //   child: SvgPicture.asset(
+      //     'assets/images/floatlogo.svg',
+      //     width: 20,
+      //     color: AppTheme().white,
+      //   ),
+      //   onPressed: () {
+      //     this.setState(() {
+      //       _page = 4;
+      //     });
+      //   },
+      // ),
       bottomNavigationBar: BottomAppBar(
         color: AppTheme().white,
         shape: CircularNotchedRectangle(),
@@ -127,14 +127,12 @@ class _TabPageState extends State<TabPage> {
                 },
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
-                      height: 10,
-                    ),
+
                     Padding(
-                      padding: const EdgeInsets.only(top: 1, bottom: 3),
+                      padding: const EdgeInsets.only(top: 18, bottom: 3),
                       child: SvgPicture.asset(
                         'assets/images/home.svg',
-                        width: 25,
+                        width: 20,
                         color: _page == 0 ? AppTheme().purple : AppTheme().grey,
                       ),
                     ),
@@ -157,12 +155,12 @@ class _TabPageState extends State<TabPage> {
                 child: Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(top: 15, bottom: 3),
+                      padding: const EdgeInsets.only(top: 20, bottom: 3),
                       child: SvgPicture.asset(
                         widget.data != null
                             ? 'assets/images/message.svg'
                             : 'assets/images/category.svg',
-                        width: 25,
+                        width: 20,
                         color: _page == 1 ? AppTheme().purple : AppTheme().grey,
                       ),
                     ),
@@ -177,16 +175,18 @@ class _TabPageState extends State<TabPage> {
                 ),
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20),
-                    child: Text(
-                      'Scan',
-                      style: TextStyle(
-                        color: AppTheme().purple,
-                        fontSize: 12,
-                      ),
+                  Container(
+                    margin: EdgeInsets.only(top: 13),
+                    padding: EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 1,color: AppTheme().grey),
+                      shape: BoxShape.circle
+                    ),
+                    child: SvgPicture.asset(
+                      'assets/images/makitsvg.svg',
+                      width: 30,
+                      color: _page == 3 ? AppTheme().purple : AppTheme().grey,
                     ),
                   ),
                 ],
@@ -200,10 +200,11 @@ class _TabPageState extends State<TabPage> {
                 child: Column(
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(top: 15, bottom: 3),
+                      padding: const EdgeInsets.only(top: 20, bottom: 3),
                       child: SvgPicture.asset(
+
                         'assets/images/search.svg',
-                        width: 25,
+                        width: 20,
                         color: _page == 2 ? AppTheme().purple : AppTheme().grey,
                       ),
                     ),
@@ -226,10 +227,10 @@ class _TabPageState extends State<TabPage> {
                       });
                     },
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 15),
+                      padding: const EdgeInsets.only(top: 20),
                       child: SvgPicture.asset(
                         'assets/images/mat.svg',
-                        width: 40,
+                        width: 35,
                         color: _page == 3 ? AppTheme().purple : AppTheme().grey,
                       ),
                     ),

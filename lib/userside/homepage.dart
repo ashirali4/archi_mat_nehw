@@ -230,12 +230,9 @@ class _HomePageState extends State<HomePage> {
                       data: slider,
                     ),
                     List1(),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: CategoryList(
-                        category: category,
-                        subcategory: false,
-                      ),
+                    CategoryList(
+                      category: category,
+                      subcategory: false,
                     ),
                     Productlist(
                       // onclick: () {
