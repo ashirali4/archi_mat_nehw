@@ -142,7 +142,7 @@ class _ProductlistState extends State<Productlist> {
                                 children: [
                                   Text(
                                     widget.i == 3
-                                        ? widget.data[index]['category']['name']
+                                        ? widget.data[index]['shop']['name']
                                         : widget.i == 4
                                             ? ''
                                             : widget.data[index]['category'],

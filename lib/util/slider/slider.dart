@@ -52,7 +52,7 @@ class _SliderPageState extends State<SliderPage> {
       children: [
         CarouselSlider(
           options: CarouselOptions(
-            height: 400,
+            height: 480,
             viewportFraction: 1,
             initialPage: 0,
             enableInfiniteScroll: true,
@@ -75,7 +75,7 @@ class _SliderPageState extends State<SliderPage> {
                 return Stack(
                   children: [
                     Container(
-                      height: 450,
+                      height: 480,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         // image: DecorationImage(
@@ -144,7 +144,7 @@ class _SliderPageState extends State<SliderPage> {
         ),
         Positioned(
           right: 30,
-          top: (200.0 - (imageList.length * 8)),
+          top: (240.0 - (imageList.length * 8)),
           child: DotsIndicator(
             // mainAxisAlignment: MainAxisAlignment.center,
             axis: Axis.vertical,

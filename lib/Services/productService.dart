@@ -19,7 +19,7 @@ class ProductService {
   Future<dynamic> getslider() async {
     try {
       var resp = await this.dio.get(
-            Config.url + "product/getsliders",
+            Config.url + "product/getallsliders",
           );
       return resp.data;
     } catch (e) {

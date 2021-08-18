@@ -21,7 +21,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int i = 0, j = 0;
-  List category = [], product1 = [], service = [], slider = [];
+  List category = [],
+      product1 = [],
+      service = [],
+      slider = [],
+      slider2 = [],
+      slider3 = [];
 
   bool loader = true;
   // List professional = [
@@ -116,8 +121,10 @@ class _HomePageState extends State<HomePage> {
       setState(() {
         if (value != null) {
           var data = value;
-          print(data['arks']);
-          slider = data['arks'];
+          // print(data['arks']);
+          slider = data['slider1'];
+          slider2 = data['slider2'];
+          slider3 = data['slider3'];
           loader = false;
         }
       });
@@ -236,7 +243,7 @@ class _HomePageState extends State<HomePage> {
                       title: 'Find Materials Around You',
                     ),
                     Slider1Page(
-                      data: slider,
+                      data: slider2,
                     ),
                     Productlist(
                       i: 1,
@@ -254,7 +261,7 @@ class _HomePageState extends State<HomePage> {
                       title: 'Find Professional Services',
                     ),
                     Slider1Page(
-                      data: slider,
+                      data: slider3,
                     ),
                     // Productlist(
                     //   i: 0,
